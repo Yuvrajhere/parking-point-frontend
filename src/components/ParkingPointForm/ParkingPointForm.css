@@ -1,0 +1,66 @@
+.ParkingPointForm {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: #181816;
+  color: #fff;
+  background: url("../../assets/images/landing_page_main.jpg") no-repeat center;
+  background-size: cover;
+  box-shadow: inset 0 0 30em 6em #000000;
+}
+
+.ParkingPointForm main {
+  padding: 20px 5%;
+  height: 83vh;
+  width: 100%;
+}
+
+.ParkingPointForm form {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ParkingPointForm form .map-div {
+  height: 100%;
+  width: 50%;
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+}
+
+.ParkingPointForm .map-div .map {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.ParkingPointForm .form-fields-div {
+  width: 48%;
+  height: 100%;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+}
+
+.ParkingPointForm .form-fields-div h2 {
+  background-color: #d3d3d3;
+  padding: 8px 20px;
+  border-radius: 5px;
+  color: #000000;
+}
+
+.ParkingPointForm .form-fields-div .form-fields {
+  margin: 30px 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.ParkingPointForm .form-fields-div button {
+  margin: 0 20px;
+}

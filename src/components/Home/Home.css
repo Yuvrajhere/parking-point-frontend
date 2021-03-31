@@ -1,0 +1,165 @@
+.Home {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: #181816;
+  color: #fff;
+  background: url("../../assets/images/landing_page_main.jpg") no-repeat center;
+  background-size: cover;
+  box-shadow: inset 0 0 30em 6em #000000;
+}
+
+.Home main {
+  padding: 20px 5%;
+  width: 100%;
+  height: 83vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Home .main-a {
+  width: 59%;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  position: relative;
+}
+
+.Home .main-a .about {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000000;
+}
+
+.Home .coins {
+  display: flex;
+  align-items: center;
+}
+
+.Home .coins .coins-count {
+  font-size: 600;
+  margin-right: 5px;
+  background-color: #ffc62d;
+  border-radius: 5px;
+  padding: 2px 5px;
+}
+
+.Home .coins img {
+  height: 24px;
+}
+
+.Home .coins .coin-info {
+  display: none;
+  position: absolute;
+  background-color: #181816;
+  border-radius: 5px;
+  color: #ffc62d;
+  padding: 10px;
+  width: 200px;
+  top: 10px;
+  right: 10px;
+}
+
+.Home .coins img:hover + .coin-info {
+  display: block;
+}
+
+.Home .main-a .booked-parking {
+  padding: 20px;
+  color: #000000;
+  border-top: 3px solid #000;
+}
+
+.Home .booked-parking > h2 {
+  background-color: #d3d3d3;
+  padding: 8px 20px;
+  border-radius: 5px;
+}
+
+.Home .booked-parking > div {
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Home .booked-parking > div h1 {
+  width: 60%;
+  text-align: center;
+  font-size: 32px;
+}
+
+.Home .booked-parking > div p {
+  color: #fff;
+  font-size: 18px;
+  margin: 10px auto 20px auto;
+}
+
+.Home .main-b {
+  width: 38.5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Home .main-b .history {
+  height: calc(50% - 10px);
+  padding: 20px;
+  color: #000;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+}
+
+.history > h2 {
+  background-color: #d3d3d3;
+  padding: 8px 20px;
+  border-radius: 5px;
+}
+
+.history > div {
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.history > div > p {
+  width: 60%;
+  font-size: 18px;
+  text-align: center;
+}
+
+.Home .main-b .saved-parkings {
+  height: calc(50% - 10px);
+  padding: 20px;
+  color: #000;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+}
+
+.saved-parkings > h2 {
+  background-color: #d3d3d3;
+  padding: 8px 20px;
+  border-radius: 5px;
+}
+
+.saved-parkings > div {
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.saved-parkings > div > p {
+  width: 70%;
+  font-size: 18px;
+  text-align: center;
+}
+

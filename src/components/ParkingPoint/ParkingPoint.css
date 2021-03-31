@@ -1,0 +1,80 @@
+.ParkingPoint {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: #181816;
+  color: #fff;
+  background: url("../../assets/images/landing_page_main.jpg") no-repeat center;
+  background-size: cover;
+  box-shadow: inset 0 0 30em 6em #000000;
+}
+
+.ParkingPoint main {
+  padding: 20px 5%;
+  height: 83vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ParkingPoint main .main-a {
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  width: 70%;
+}
+
+.ParkingPoint .main-a > div {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.ParkingPoint main .main-b {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  width: 29%;
+  padding: 10px;
+}
+
+.ParkingPoint main .main-b  h2 {
+  background-color: #d3d3d3;
+  padding: 8px 20px;
+  border-radius: 5px;
+  color: #000000;
+}
+
+.ParkingPoint .main-b .details-div{
+  display: flex;
+  flex-direction: column;
+}
+
+.ParkingPoint .main-b .details {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffc62d;
+  padding: 20px;
+  border-radius: 5px;
+  color: #000;
+  margin: 20px 0;
+}
+
+.ParkingPoint .main-b .details > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ParkingPoint .main-b .parkings {
+  display: flex;
+  flex-direction: column;
+}
+
+.ParkingPoint .main-b .parkings > div {
+  background-color: #ffc62d;
+  padding: 20px;
+  border-radius: 5px;
+  color: #000;
+  margin-top: 20px;
+}

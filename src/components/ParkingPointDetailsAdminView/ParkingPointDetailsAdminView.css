@@ -1,0 +1,60 @@
+.ParkingPointDetailsAdminView {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: #181816;
+  color: #fff;
+  background: url("../../assets/images/landing_page_main.jpg") no-repeat center;
+  background-size: cover;
+  box-shadow: inset 0 0 30em 6em #000000;
+}
+
+.ParkingPointDetailsAdminView main {
+  padding: 20px 5%;
+  height: 83vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ParkingPointDetailsAdminView main .main-a {
+  height: 100%;
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  width: 50%;
+}
+
+.ParkingPointDetailsAdminView main .main-a .map {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.ParkingPointDetailsAdminView .main-b {
+  width: 48%;
+  height: 100%;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+}
+
+.ParkingPointDetailsAdminView .main-b h2 {
+  background-color: #d3d3d3;
+  padding: 8px 20px;
+  border-radius: 5px;
+  color: #000000;
+}
+
+.ParkingPointDetailsAdminView .main-b .fields {
+  margin: 30px 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.ParkingPointDetailsAdminView .main-b button {
+  margin: 0 20px;
+}

@@ -1,0 +1,62 @@
+.AdminNavbar nav {
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.AdminNavbar nav h2 {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #fbfbfb;
+}
+
+.AdminNavbar nav h2 img {
+  margin-right: 10px;
+  height: 40px;
+  width: 40px;
+}
+
+.AdminNavbar nav h2 span {
+  color: #ffc62d;
+}
+
+.AdminNavbar nav > ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 180px;
+}
+
+.AdminNavbar nav .logout {
+  background-color: #c22323;
+  color: #fbfbfb;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+
+.AdminNavbar nav .logout:hover {
+  background-color: #ffc62d;
+  color: #000;
+}
+
+.AdminNavbar nav a {
+  color: #fbfbfb;
+  text-decoration: none;
+}
+
+.AdminNavbar nav a:hover {
+  color: #cfa430;
+}
+
+.AdminNavbar nav .landing-page-active-link {
+  color: #ffc62d;
+}
+
+.AdminNavbar nav img {
+  height: 50px;
+  cursor: pointer;
+}

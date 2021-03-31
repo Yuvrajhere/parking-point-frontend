@@ -1,0 +1,125 @@
+.Signup {
+  background-color: #080e10;
+}
+
+.Signup main {
+  background: url("../../assets/images/landing_page_main.jpg") no-repeat center;
+  background-size: cover;
+  box-shadow: inset 24em 0 30em 6em #000000;
+  height: 100vh;
+}
+
+.Signup nav {
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Signup nav h2 {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #fbfbfb;
+}
+
+.Signup nav h2 img {
+  margin-right: 10px;
+  height: 40px;
+  width: 40px;
+}
+
+.Signup nav h2 span {
+  color: #ffc62d;
+}
+
+.Signup nav > ul {
+  display: flex;
+  justify-content: space-between;
+  min-width: 260px;
+}
+
+.Signup nav a {
+  color: #fbfbfb;
+  text-decoration: none;
+}
+
+.Signup nav a:hover {
+  color: #cfa430;
+}
+
+.Signup nav .landing-page-active-link {
+  color: #ffc62d;
+}
+
+.Signup nav img {
+  height: 50px;
+  cursor: pointer;
+}
+
+.Signup nav .menu {
+  background-color: rgb(255, 199, 45, 0.5);
+  backdrop-filter: blur(6px);
+  overflow-x: hidden;
+  width: 0;
+  display: none;
+}
+
+.Signup nav .menu-btn {
+  height: 30px;
+  display: none;
+}
+
+.Signup nav .close-btn {
+  height: 30px;
+  display: none;
+}
+
+.Signup .main-content {
+  padding: 40px 5%;
+}
+
+.Signup .main-content h1 {
+  font-size: 40px;
+  color: #ffc62d;
+}
+
+.Signup .main-content h1 span {
+  color: #fbfbfb;
+}
+
+.Signup .main-content > p {
+  font-size: 18px;
+  margin: 20px 0 0 0;
+  width: 30%;
+  color: #fbfbfb;
+}
+
+.Signup .main-content > p span {
+  color: #ffc62d;
+}
+
+.Signup .main-content form {
+  margin: 50px 0;
+}
+
+.Signup .main-content form .form-fields {
+  display: grid;
+  grid-template-columns: 300px 300px;
+}
+
+.Signup .main-content .alt {
+  font-size: 18px;
+}
+
+.Signup .main-content .alt p {
+  color: #fbfbfb;
+}
+
+.Signup .main-content .alt a {
+  color: #ffc62d;
+}
+
+.Signup .main-content .alt a:hover {
+  color: #cfa430;
+}
