@@ -33,6 +33,7 @@
 .LandingNavbar .menu {
   background-color: rgb(255, 199, 45, 0.5);
   backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   overflow-x: hidden;
   width: 0;
   display: none;
