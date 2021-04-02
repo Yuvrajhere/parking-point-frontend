@@ -422,33 +422,17 @@ header:before {
   }
 
   .LandingPage .main-a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     width: 100%;
   }
 
   .LandingPage .main-a h1 {
     font-size: 32px;
-    text-align: center;
   }
 
   .LandingPage .main-a p {
     font-size: 16px;
-    text-align: center;
     margin: 20px 0;
     width: 90%;
-  }
-
-  .LandingPage .main-a .main-a-btns {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .LandingPage .main-a .main-a-btns button:first-child {
-    margin-right: 0;
-    margin-bottom: 10px;
   }
 
   .LandingPage .main-b > div {
