@@ -1,0 +1,28 @@
+.Input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.Input label {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.Input input {
+  font-size: 14px;
+  padding: 10px;
+  min-width: 260px;
+  border-radius: 3px;
+  border: none;
+}
+
+.Input input::placeholder {
+  color: #000;
+}
+
+.Input input:focus {
+  background-color: #ffc62d;
+  color: #000;
+}

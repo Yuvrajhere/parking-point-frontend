@@ -2,13 +2,6 @@
   background-color: #080e10;
 }
 
-.Signup main {
-  background: url("../../assets/images/landing_page_main.jpg") no-repeat center;
-  background-size: cover;
-  box-shadow: inset 24em 0 30em 6em #000000;
-  height: 100vh;
-}
-
 .Signup .main-content {
   padding: 40px 5%;
 }
@@ -38,8 +31,14 @@
 }
 
 .Signup .main-content form .form-fields {
-  display: grid;
-  grid-template-columns: 300px 300px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 550px;
+}
+
+.Signup .btn {
+  margin-top: 10px;
 }
 
 .Signup .main-content .alt {
@@ -56,4 +55,10 @@
 
 .Signup .main-content .alt a:hover {
   color: #cfa430;
+}
+
+@media screen and (max-width: 800px) {
+  .Signup .main-content > p {
+    width: 90%;
+  }
 }

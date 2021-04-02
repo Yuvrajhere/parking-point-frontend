@@ -6,11 +6,10 @@ import LandingNavbar from "../smallerComponents/LandingNavbar";
 import { showError, startLoading, stopLoading } from "../../actions/index";
 import { connect } from "react-redux";
 import axios from "axios";
-import { Link, NavLink } from "react-router-dom";
-import googlePlayBadge from "../../assets/images/google-play-badge.png";
-import parkingPointLogo from "../../assets/images/parking-point-logo.png";
+import { Link } from "react-router-dom";
 
 import { useState } from "react";
+import Input from "../smallerComponents/Input";
 
 const mapStateToProps = (state) => {
   return {
@@ -65,7 +64,7 @@ const Login = (props) => {
 
   return (
     <div className="Login">
-      <main>
+      <main className="main-container">
         <LandingNavbar />
         <div className="main-content">
           <h1>
@@ -77,33 +76,30 @@ const Login = (props) => {
             <span> your registered email and password.</span>
           </p>
           <form onSubmit={handleSubmit}>
-            <div className="form-child">
-              <label htmlFor="email">Email</label>
-              <input
+            <div className="form-fields">
+              <Input
+                name="email"
+                label="Email"
                 type="text"
-                id="email"
                 placeholder="Enter email here"
                 minLength="5"
                 maxLength="30"
                 required
-                name="email"
                 value={signinData.email}
-                onChange={handleInputChange}
+                handleInputChange={handleInputChange}
                 autoComplete="off"
               />
-            </div>
-            <div className="form-child">
-              <label htmlFor="password">Password</label>
-              <input
+              <Input
+                name="password"
+                label="Password"
                 type="password"
-                id="password"
                 placeholder="Enter password here"
                 minLength="6"
                 maxLength="10"
                 required
-                name="password"
                 value={signinData.password}
-                onChange={handleInputChange}
+                handleInputChange={handleInputChange}
+                autoComplete="off"
               />
             </div>
             <Button buttonType="pri-btn">Login</Button>

@@ -3,10 +3,6 @@
 }
 
 .LandingPage main {
-  background: url("../../assets/images/landing_page_main.jpg") no-repeat center;
-  background-size: cover;
-  box-shadow: inset 24em 0 30em 6em #000000;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -414,12 +410,6 @@ header:before {
 }
 
 @media screen and (max-width: 800px) {
-
-  .LandingPage main {
-    background: url("../../assets/images/landing_page_main_flipped.jpg") no-repeat -180px;
-    background-size: cover;
-    box-shadow: inset 0 0 20em 3em #000000;
-  }
 
   .LandingPage .main-a {
     width: 100%;

@@ -1,5 +1,6 @@
 import Button from "../smallerComponents/Button";
 import LandingNavbar from "../smallerComponents/LandingNavbar";
+import Input from "../smallerComponents/Input";
 
 import { connect } from "react-redux";
 import axios from "axios";
@@ -84,7 +85,7 @@ const Signup = (props) => {
 
   return (
     <div className="Signup">
-      <main>
+      <main className="main-container">
         <LandingNavbar />
         <div className="main-content">
           <h1>
@@ -97,99 +98,85 @@ const Signup = (props) => {
           </p>
           <form onSubmit={handleSubmit}>
             <div className="form-fields">
-              <div className="form-child">
-                <label htmlFor="firstName">First Name</label>
-                <input
-                  type="text"
-                  id="firstName"
-                  autoComplete="off"
-                  placeholder="Enter first name here"
-                  minLength="1"
-                  maxLength="12"
-                  required
-                  name="firstName"
-                  value={signupData.firstName}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-child">
-                <label htmlFor="lastName">Last Name</label>
-                <input
-                  type="text"
-                  id="lastName"
-                  placeholder="Enter last name here"
-                  minLength="1"
-                  maxLength="12"
-                  required
-                  name="lastName"
-                  value={signupData.lastName}
-                  onChange={handleInputChange}
-                  autoComplete="off"
-                />
-              </div>
-              <div className="form-child">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="text"
-                  id="email"
-                  placeholder="Enter email here"
-                  minLength="5"
-                  maxLength="30"
-                  required
-                  name="email"
-                  value={signupData.email}
-                  onChange={handleInputChange}
-                  autoComplete="off"
-                />
-              </div>
-              <div className="form-child">
-                <label htmlFor="phone">Phone number</label>
-                <input
-                  type="text"
-                  id="phone"
-                  placeholder="Enter phone number here"
-                  minLength="5"
-                  maxLength="30"
-                  required
-                  name="phone"
-                  value={signupData.phone}
-                  onChange={handleInputChange}
-                  autoComplete="off"
-                />
-              </div>
-              <div className="form-child">
-                <label htmlFor="password1">Password</label>
-                <input
-                  type="password"
-                  id="password1"
-                  placeholder="Enter password here"
-                  minLength="6"
-                  maxLength="10"
-                  required
-                  name="password1"
-                  value={signupData.password1}
-                  onChange={handleInputChange}
-                  autoComplete="off"
-                />
-              </div>
-              <div className="form-child">
-                <label htmlFor="password2">Confirm Password</label>
-                <input
-                  type="password"
-                  id="password2"
-                  placeholder="Enter password again here"
-                  minLength="6"
-                  maxLength="10"
-                  required
-                  name="password2"
-                  value={signupData.password2}
-                  onChange={handleInputChange}
-                  autoComplete="off"
-                />
-              </div>
+              <Input
+                type="text"
+                name="firstName"
+                label="First Name"
+                placeholder="Enter first name here"
+                minLength="1"
+                maxLength="12"
+                required
+                value={signupData.firstName}
+                handleInputChange={handleInputChange}
+                autoComplete="off"
+              />
+
+              <Input
+                type="text"
+                name="lastName"
+                label="Last Name"
+                placeholder="Enter last name here"
+                minLength="1"
+                maxLength="12"
+                required
+                value={signupData.lastName}
+                handleInputChange={handleInputChange}
+                autoComplete="off"
+              />
+
+              <Input
+                type="text"
+                name="email"
+                label="Email"
+                placeholder="Enter email here"
+                minLength="5"
+                maxLength="30"
+                required
+                value={signupData.email}
+                handleInputChange={handleInputChange}
+                autoComplete="off"
+              />
+
+              <Input
+                type="text"
+                name="phone"
+                label="Phone Number"
+                placeholder="Enter phone number here"
+                minLength="5"
+                maxLength="30"
+                required
+                value={signupData.phone}
+                handleInputChange={handleInputChange}
+                autoComplete="off"
+              />
+
+              <Input
+                type="password"
+                name="password1"
+                label="Password"
+                placeholder="Enter password here"
+                minLength="6"
+                maxLength="10"
+                required
+                value={signupData.password1}
+                handleInputChange={handleInputChange}
+                autoComplete="off"
+              />
+
+              <Input
+                type="password"
+                name="password2"
+                label="Confirm Password"
+                placeholder="Enter password again here"
+                minLength="6"
+                maxLength="10"
+                required
+                value={signupData.password2}
+                handleInputChange={handleInputChange}
+                autoComplete="off"
+              />
             </div>
-            <Button buttonType="pri-btn">Singup</Button>
-            {/* <input className="submit-btn" type="submit" value="Signup" /> */}
+            <Button buttonType="pri-btn">Signup</Button>
           </form>
           <div className="alt">
             <p>
