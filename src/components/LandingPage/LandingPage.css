@@ -12,72 +12,6 @@
   justify-content: space-between;
 }
 
-.LandingPage nav {
-  padding: 20px 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.LandingPage nav h2 {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  color: #fbfbfb;
-}
-
-.LandingPage nav h2 img {
-  margin-right: 10px;
-  height: 40px;
-  width: 40px;
-}
-
-.LandingPage nav h2 span {
-  color: #ffc62d;
-}
-
-.LandingPage nav > ul {
-  display: flex;
-  justify-content: space-between;
-  min-width: 260px;
-}
-
-.LandingPage nav a {
-  color: #fbfbfb;
-  text-decoration: none;
-}
-
-.LandingPage nav a:hover {
-  color: #cfa430;
-}
-
-.LandingPage nav .landing-page-active-link {
-  color: #ffc62d;
-}
-
-.LandingPage nav img {
-  height: 50px;
-  cursor: pointer;
-}
-
-.LandingPage nav .menu {
-  background-color: rgb(255, 199, 45, 0.5);
-  backdrop-filter: blur(6px);
-  overflow-x: hidden;
-  width: 0;
-  display: none;
-}
-
-.LandingPage nav .menu-btn {
-  height: 30px;
-  display: none;
-}
-
-.LandingPage nav .close-btn {
-  height: 30px;
-  display: none;
-}
-
 .LandingPage main .main-a,
 .LandingPage main .main-b {
   padding: 0 5%;
@@ -103,40 +37,8 @@
   color: #ffc62d;
 }
 
-.LandingPage .main-a-btns {
-  display: flex;
-}
-
-.LandingPage .main-a-btns button {
-  padding: 10px 30px;
-  font-size: 20px;
-  cursor: pointer;
-  border: none;
-  border-radius: 3px;
-  transition: 500ms ease-out;
-}
-
-.LandingPage .main-a-btns a:first-child button {
-  margin-right: 40px;
-  background-color: #ffc62d;
-  border: 2px solid #ffc62d;
-}
-
-.LandingPage .main-a-btns a:first-child button:hover {
-  background-color: #000;
-  border: 2px solid #ffc62d;
-  color: #ffc62d;
-}
-
-.LandingPage .main-a-btns a:last-child button {
-  background-color: #fbfbfb;
-  border: 2px solid #fbfbfb;
-}
-
-.LandingPage .main-a-btns a:last-child button:hover {
-  background-color: #000;
-  border: 2px solid #fbfbfb;
-  color: #fbfbfb;
+.LandingPage .main-a .main-a-btns button:first-child {
+  margin-right: 20px;
 }
 
 .LandingPage main .main-b {
@@ -159,6 +61,7 @@
   background-color: #ffc62d;
   position: relative;
   padding: 60px 5% 0 5%;
+  overflow: hidden;
 }
 
 .LandingPage .working .floats:nth-of-type(1) {
@@ -377,28 +280,50 @@ header:before {
   margin-top: 80px;
 }
 
-.LandingPage footer nav h2 {
+/* footer navbar */
+
+.LandingPage footer nav {
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.LandingPage footer nav .BrandLogo h2 {
   color: #000;
 }
 
-.LandingPage footer nav h2 span {
+.LandingPage footer nav .BrandLogo h2 span {
   color: #000;
+}
+
+.LandingPage footer nav > ul {
+  display: flex;
+  justify-content: space-between;
+  min-width: 260px;
 }
 
 .LandingPage footer nav a {
   color: #000;
+  text-decoration: none;
 }
 
 .LandingPage footer nav a:hover {
   color: #fbfbfb;
 }
 
-.LandingPage footer .landing-page-active-link {
+.LandingPage footer .active {
   color: #000;
   font-weight: 700;
 }
 
-.LandingPage footer .footer-content {
+.LandingPage footer nav .playstore-badge img {
+  height: 50px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.LandingPage .footer-content {
   padding: 20px 5%;
   display: flex;
 }
@@ -489,101 +414,52 @@ header:before {
 }
 
 @media screen and (max-width: 800px) {
-  .LandingPage main {
-    background: url("../../assets/images/landing_page_main.jpg") no-repeat 60%
-      center;
-    background-size: cover;
-    box-shadow: inset 14em 0 30em 6em #000;
-  }
-
-  .LandingPage nav {
-    align-items: center;
-  }
-
-  .LandingPage nav > ul {
-    display: none;
-  }
-
-  .LandingPage nav a {
-    color: #fbfbfb;
-    text-decoration: none;
-  }
-
-  .LandingPage nav a:hover {
-    color: #cfa430;
-  }
-
-  .LandingPage nav .landing-page-active-link {
-    color: #ffc62d;
-  }
-
-  .LandingPage nav > img {
-    display: none;
-  }
-
-  .LandingPage nav .menu-btn {
-    display: inline-block;
-    transition: all ease-in 1000ms;
-  }
-
-  .LandingPage nav .close-btn {
-    display: inline-block;
-    transition: all ease-in 1000ms;
-    position: absolute;
-    top: 20px;
-    right: 40px;
-  }
-
-  .LandingPage nav .menu {
-    top: 0;
-    right: 0;
-    position: fixed;
-    display: flex;
-    width: 0;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    transition: 500ms;
-    height: 100vh;
-    z-index: 4;
-    overflow-x: hidden;
-  }
-
-  .LandingPage .menu a {
-    color: #000;
-    cursor: pointer;
-    font-size: 20px;
-  }
-
-  .LandingPage .menu a:hover {
-    color: #fbfbfb;
-  }
-
-  .LandingPage .menu .landing-page-active-link {
-    color: #000;
-    font-weight: 700;
-  }
-
-  .LandingPage nav .menu ul {
+  .LandingPage .main-a {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .LandingPage .menu li {
-    margin-bottom: 10px;
-  }
-
-  .LandingPage .menu ul > img {
-    padding: 0;
-    margin: 0;
     width: 100%;
   }
 
+  .LandingPage .main-a h1 {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .LandingPage .main-a p {
+    font-size: 16px;
+    text-align: center;
+    margin: 20px 0;
+    width: 90%;
+  }
+
+  .LandingPage .main-a .main-a-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .LandingPage .main-a .main-a-btns button:first-child {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
   .LandingPage .main-b > div {
-    min-width: 50%;
+    width: 50%;
     margin-top: 30px;
+  }
+
+  /* start of working */
+  .LandingPage .working .floats:nth-of-type(1) {
+    bottom: -6%;
+    height: 200px;
+  }
+
+  .LandingPage .working .floats:nth-of-type(2) {
+    position: absolute;
+    left: 5%;
+    top: 26%;
+    height: 160px;
   }
 
   #timeline {
@@ -612,94 +488,72 @@ header:before {
   #timeline .timeline-item .timeline-icon {
     left: 0;
   }
-}
 
-@media screen and (max-width: 600px) {
-  .LandingPage main {
-    background: url("../../assets/images/landing_page_main.jpg") no-repeat 70%;
-    background-size: cover;
-    box-shadow: inset 10em 0 30em 6em #000000;
+  /* start of feature */
+
+  .LandingPage .features .floats:nth-of-type(2) {
+    display: none;
   }
 
-  .LandingPage .main-a h1 {
-    font-size: 36px;
-    color: #fbfbfb;
+  .LandingPage .features h1:nth-of-type(1) {
+    right: -500px;
   }
 
-  .LandingPage .main-a p {
-    font-size: 18px;
-    width: 70%;
+  .LandingPage .features h1:nth-of-type(2) {
+    right: -498px;
   }
 
-  .LandingPage .main-a-btns button {
-    font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .LandingPage main {
-    background: url("../../assets/images/landing_page_main.jpg") no-repeat 70%;
-    background-size: cover;
-    box-shadow: inset 3em 3em 30em 6em #000000;
+  .LandingPage .features .features-list {
+    margin: 40% 10% 0 0;
   }
 
-  .LandingPage nav .close-btn {
-    right: 20px;
+  .LandingPage .feature {
+    margin-right: 20px;
   }
 
-  .LandingPage nav .menu a {
-    font-size: 16px;
+  .LandingPage .feature img {
+    width: 80px;
   }
 
-  .LandingPage main .main-b {
-    padding-bottom: 30px;
-  }
-
-  .LandingPage .main-b h2 {
+  .LandingPage .feature h2 {
     font-size: 20px;
   }
 
-  .LandingPage .main-b p {
-    font-size: 12px;
+  .LandingPage .feature p {
+    font-size: 14px;
   }
-}
 
-@media screen and (max-width: 400px) {
-  .LandingPage main .main-a {
+  /* footer navbar */
+
+  .LandingPage footer nav > ul {
+    display: none;
+  }
+
+  .LandingPage footer nav .playstore-badge {
+    display: none;
+  }
+
+  .LandingPage .footer-content {
+    flex-direction: column;
+  }
+
+  .LandingPage footer .footer-info {
+    padding-right: 0;
+    padding-bottom: 40px;
+    border-right: none;
+    border-bottom: 4px solid #000;
+    max-width: 100%;
+  }
+
+  .LandingPage footer .contact {
+    padding-left: 0;
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
   }
 
-  .LandingPage .main-a h1 {
-    font-size: 32px;
-    text-align: center;
-  }
-
-  .LandingPage .main-a p {
-    font-size: 16px;
-    width: 90%;
-    text-align: center;
-  }
-
-  .LandingPage .main-a-btns {
-    flex-direction: column;
-  }
-
-  .LandingPage .main-a-btns button {
-    padding: 5px 15px;
-    font-size: 16px;
-    width: 200px;
-  }
-
-  .LandingPage .main-a-btns button:first-child {
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-
-  .LandingPage main .main-b {
-    padding-bottom: 40px;
-    text-align: center;
+  .LandingPage .contact .contact-links {
+    margin-top: 20px;
   }
 }

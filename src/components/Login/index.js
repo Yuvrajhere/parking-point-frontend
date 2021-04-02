@@ -1,4 +1,8 @@
 import "./Login.css";
+
+import Button from "../smallerComponents/Button";
+import LandingNavbar from "../smallerComponents/LandingNavbar";
+
 import { showError, startLoading, stopLoading } from "../../actions/index";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -62,92 +66,7 @@ const Login = (props) => {
   return (
     <div className="Login">
       <main>
-        <nav>
-          <h2>
-            <img src={parkingPointLogo} />
-            <span>P</span>arking <span> P</span>oint
-          </h2>
-          <ul>
-            <li>
-              <NavLink to="/" activeClassName="landing-page-active-link" exact>
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/login"
-                activeClassName="landing-page-active-link"
-                exact
-              >
-                Login
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to="/signup"
-                activeClassName="landing-page-active-link"
-                exact
-              >
-                Signup
-              </NavLink>
-            </li>
-          </ul>
-          <img src={googlePlayBadge} />
-          {/* <div className="menu">
-            <img
-              className="close-btn"
-              onClick={() => {
-                document.getElementsByClassName("menu")[0].style.width = "0";
-                setIsMenuOpen(false);
-              }}
-              src={iconClose}
-            />
-            <ul>
-              <li>
-                <NavLink
-                  to="/"
-                  activeClassName="landing-page-active-link"
-                  exact
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/login"
-                  activeClassName="landing-page-active-link"
-                  exact
-                >
-                  Login
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink
-                  to="/signup"
-                  activeClassName="landing-page-active-link"
-                  exact
-                >
-                  Signup
-                </NavLink>
-              </li>
-              <li>
-                <img src={googlePlayBadge} />
-              </li>
-            </ul>
-          </div>
-          {!isMenuOpen && (
-            <img
-              onClick={() => {
-                document.getElementsByClassName("menu")[0].style.width = "50%";
-                setIsMenuOpen(true);
-              }}
-              src={iconMenu}
-              className="menu-btn"
-            ></img>
-          )} */}
-        </nav>
+        <LandingNavbar />
         <div className="main-content">
           <h1>
             Login <br />
@@ -187,7 +106,7 @@ const Login = (props) => {
                 onChange={handleInputChange}
               />
             </div>
-            <input className="submit-btn" type="submit" value="Login" />
+            <Button buttonType="pri-btn">Login</Button>
           </form>
           <div className="alt">
             <p>

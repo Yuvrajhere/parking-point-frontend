@@ -112,7 +112,7 @@ a {
   height: 20px !important;
 }
 
-.sec-btn {
+/* .sec-btn {
   padding: 10px 30px;
   font-size: 16px;
   cursor: pointer;
@@ -127,7 +127,7 @@ a {
   background-color: #000;
   border: 2px solid #fbfbfb;
   color: #fbfbfb;
-}
+} */
 
 .App {
   position: relative;

@@ -1,0 +1,19 @@
+.BrandLogo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.BrandLogo img {
+  margin-right: 10px;
+  height: 40px;
+  width: 40px;
+}
+
+.BrandLogo h2 {
+  color: #fbfbfb;
+}
+
+.BrandLogo h2 span {
+  color: #ffc62d;
+}

@@ -1,0 +1,110 @@
+.LandingNavbar {
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.LandingNavbar > ul {
+  display: flex;
+  justify-content: space-between;
+  min-width: 260px;
+}
+
+.LandingNavbar a {
+  color: #fbfbfb;
+  text-decoration: none;
+}
+
+.LandingNavbar a:hover {
+  color: #cfa430;
+}
+
+.LandingNavbar .active {
+  color: #ffc62d;
+}
+
+.LandingNavbar .playstore-badge img {
+  height: 50px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.LandingNavbar .menu {
+  background-color: rgb(255, 199, 45, 0.5);
+  backdrop-filter: blur(6px);
+  overflow-x: hidden;
+  width: 0;
+  display: none;
+
+  transition: 500ms;
+  height: 100vh;
+  z-index: 3;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.LandingNavbar .menu .close-btn {
+  height: 30px;
+  display: none;
+
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.LandingNavbar .menu ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.LandingNavbar .menu li {
+  margin-bottom: 10px;
+}
+
+.LandingNavbar .menu a {
+  color: #000;
+  font-size: 20px;
+}
+
+.LandingNavbar .menu a.active {
+  color: #000;
+  font-weight: 700;
+}
+
+.LandingNavbar .menu ul img {
+  width: 200px;
+}
+
+.LandingNavbar .menu-btn {
+  height: 30px;
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  .LandingNavbar > ul {
+    display: none;
+  }
+
+  .LandingNavbar .playstore-badge {
+    display: none;
+  }
+
+  .LandingNavbar .menu {
+    display: flex;
+  }
+
+  .LandingNavbar .menu .close-btn {
+    display: block;
+  }
+
+  .LandingNavbar .menu-btn {
+    display: block;
+  }
+}

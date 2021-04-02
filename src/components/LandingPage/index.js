@@ -1,6 +1,10 @@
 import "./LandingPage.css";
 
-import { Link, NavLink } from "react-router-dom";
+import Button from "../smallerComponents/Button";
+import LandingNavbar from "../smallerComponents/LandingNavbar";
+import BrandLogo from "../smallerComponents/BrandLogo";
+
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { useState } from "react";
 
 import googlePlayBadge from "../../assets/images/google-play-badge.png";
@@ -30,101 +34,13 @@ import iconDiscordBlack from "../../assets/images/icon_discord_black.png";
 import iconLinkedinBlack from "../../assets/images/icon_linkedin_black.png";
 import iconInstagramBlack from "../../assets/images/icon_instagram_black.png";
 
-import iconMenu from "../../assets/images/icon-menu.png";
-import iconClose from "../../assets/images/icon-close.png";
-
 const LandingPage = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const history = useHistory();
 
   return (
     <div className="LandingPage">
       <main>
-        <nav>
-          <h2>
-            <img src={parkingPointLogo} />
-            <span>P</span>arking <span> P</span>oint
-          </h2>
-          <ul>
-            <li>
-              <NavLink to="/" activeClassName="landing-page-active-link" exact>
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/login"
-                activeClassName="landing-page-active-link"
-                exact
-              >
-                Login
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                to="/signup"
-                activeClassName="landing-page-active-link"
-                exact
-              >
-                Signup
-              </NavLink>
-            </li>
-          </ul>
-          <Link to="/playstore"><img src={googlePlayBadge} /></Link>
-          <div className="menu">
-            <img
-              className="close-btn"
-              onClick={() => {
-                document.getElementsByClassName("menu")[0].style.width = "0";
-                setIsMenuOpen(false);
-              }}
-              src={iconClose}
-            />
-            <ul>
-              <li>
-                <NavLink
-                  to="/"
-                  activeClassName="landing-page-active-link"
-                  exact
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/login"
-                  activeClassName="landing-page-active-link"
-                  exact
-                >
-                  Login
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink
-                  to="/signup"
-                  activeClassName="landing-page-active-link"
-                  exact
-                >
-                  Signup
-                </NavLink>
-              </li>
-              <li>
-                <Link to="/playstore"><img src={googlePlayBadge} /></Link>
-              </li>
-            </ul>
-          </div>
-          {!isMenuOpen && (
-            <img
-              onClick={() => {
-                document.getElementsByClassName("menu")[0].style.width = "50%";
-                setIsMenuOpen(true);
-              }}
-              src={iconMenu}
-              className="menu-btn"
-            ></img>
-          )}
-        </nav>
+        <LandingNavbar />
         <div className="main-a">
           <h1>
             Find parkings with <br />
@@ -136,12 +52,22 @@ const LandingPage = () => {
             like, instantly.
           </p>
           <div className="main-a-btns">
-            <Link to="/signup">
-              <button>Signup</button>
-            </Link>
-            <Link to="/login">
-              <button>Login</button>
-            </Link>
+            <Button
+              buttonType="pri-btn"
+              handleClick={() => {
+                history.push("/signup");
+              }}
+            >
+              Signup
+            </Button>
+            <Button
+              buttonType="sec-btn"
+              handleClick={() => {
+                history.push("/signup");
+              }}
+            >
+              Login
+            </Button>
           </div>
         </div>
         <div className="main-b">
@@ -231,37 +157,27 @@ const LandingPage = () => {
       </section>
       <footer>
         <nav>
-          <h2>
-            <img src={parkingPointLogo} />
-            <span>P</span>arking <span> P</span>oint
-          </h2>
+          <BrandLogo />
           <ul>
             <li>
-              {" "}
-              <NavLink to="/" activeClassName="landing-page-active-link" exact>
+              <NavLink to="/" activeClassName="active" exact>
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/login"
-                activeClassName="landing-page-active-link"
-                exact
-              >
+              <NavLink to="/login" activeClassName="active" exact>
                 Login
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/signup"
-                activeClassName="landing-page-active-link"
-                exact
-              >
+              <NavLink to="/signup" activeClassName="active" exact>
                 Signup
               </NavLink>
             </li>
           </ul>
-          <img src={googlePlayBadge} />
+          <Link className="playstore-badge" to="/playstore">
+            <img src={googlePlayBadge} />
+          </Link>
         </nav>
         <div className="footer-content">
           <div className="footer-info">
@@ -282,23 +198,23 @@ const LandingPage = () => {
               can connect with me on below platforms.
             </p>
             <div className="contact-links">
-              <a href="https://github.com/">
+              <a href="https://github.com/Yuvrajhere">
                 <img src={iconGithubBlack} />
                 <img src={iconGithub} />
               </a>
-              <a href="https://linkedin.com">
+              <a href="https://www.linkedin.com/in/yuvraj-singh-chouhan-008953147/">
                 <img src={iconLinkedinBlack} />
                 <img src={iconLinkedin} />
               </a>
-              <a href="https://twitter.com/">
+              <a href="https://twitter.com/YuvrajS23650613">
                 <img src={iconTwitterBlack} />
                 <img src={iconTwitter} />
               </a>
-              <a href="https://instagram.com">
+              <a href="https://www.instagram.com/yuvraj_singh_c/">
                 <img src={iconInstagramBlack} />
                 <img src={iconInstagram} />
               </a>
-              <a href="https://discord.com">
+              <a href="https://discordapp.com/users/301767714685321226/">
                 <img src={iconDiscordBlack} />
                 <img src={iconDiscord} />
               </a>

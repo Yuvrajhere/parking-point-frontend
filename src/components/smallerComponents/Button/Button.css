@@ -1,0 +1,38 @@
+.btn {
+  padding: 10px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  transition: 500ms ease-out;
+  min-width: 140px
+}
+
+.pri-btn {
+  background-color: #ffc62d;
+  border: 2px solid #ffc62d;
+}
+
+.pri-btn:hover {
+  background-color: #000;
+  border: 2px solid #ffc62d;
+  color: #ffc62d;
+}
+
+.sec-btn {
+  background-color: #fbfbfb;
+  border: 2px solid #fbfbfb;
+}
+
+.sec-btn:hover {
+  background-color: #000;
+  border: 2px solid #fbfbfb;
+  color: #fbfbfb;
+}
+
+@media screen and (max-width: 800px) {
+  .btn {
+  padding: 8px 20px;
+  font-size: 14px;
+  }
+}
