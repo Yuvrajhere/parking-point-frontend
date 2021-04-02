@@ -414,6 +414,13 @@ header:before {
 }
 
 @media screen and (max-width: 800px) {
+
+  .LandingPage main {
+    background: url("../../assets/images/landing_page_main_flipped.jpg") no-repeat -180px;
+    background-size: cover;
+    box-shadow: inset 4em 0 30em 6em #000000;
+  }
+
   .LandingPage .main-a {
     display: flex;
     flex-direction: column;
@@ -422,14 +429,14 @@ header:before {
   }
 
   .LandingPage .main-a h1 {
-    font-size: 32px;
+    font-size: 36px;
     text-align: center;
   }
 
   .LandingPage .main-a p {
-    font-size: 16px;
+    font-size: 18px;
     text-align: center;
-    margin: 20px 0;
+    margin: 30px 0;
     width: 90%;
   }
 
