@@ -44,7 +44,7 @@ const UserProfile = () => {
             <Input label="Phone Number" value={userDetails.phone} readOnly />
             <Input label="Balance" value={userDetails.balance} readOnly />
             <Link to="/profile/edit">
-              <Button className="pri-btn">Edit</Button>
+              <Button buttonType="pri-btn">Edit</Button>
             </Link>
           </div>
         </div>

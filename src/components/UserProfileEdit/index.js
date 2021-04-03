@@ -43,10 +43,10 @@ const UserProfileEdit = () => {
             <Input label="Phone Number" value={userDetails.phone} readOnly />
             <div>
               <Link to="/profile/edit">
-                <Button className="pri-btn">Update</Button>
+                <Button buttonType="pri-btn">Update</Button>
               </Link>
               <Link to="/profile/">
-                <Button className="sec-btn">Cancel</Button>
+                <Button buttonType="sec-btn">Cancel</Button>
               </Link>
             </div>
           </div>
