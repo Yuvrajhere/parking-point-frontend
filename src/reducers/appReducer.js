@@ -1,6 +1,6 @@
 export const initialState = {
   loading: false,
-  error: "",
+  alert: "",
   searchText: ""
 };
 
@@ -20,17 +20,17 @@ export const appReducer = (state = initialState, action) => {
       };
     }
 
-    case "REMOVE_ERROR": {
+    case "REMOVE_ALERT": {
       return {
         ...state,
-        error: "",
+        alert: "",
       };
     }
 
-    case "SHOW_ERROR": {
+    case "SHOW_ALERT": {
       return {
         ...state,
-        error: action.payload
+        alert: action.payload
       }
     }
 

@@ -5,7 +5,7 @@ import ReactMapGL, { Marker, NavigationControl, Popup } from "react-map-gl";
 import iconLocationPinWhite from "../../assets/images/icon-location-pin-white.png";
 import iconLocationPinYellow from "../../assets/images/icon-location-pin-yellow.png";
 import { connect } from "react-redux";
-import { showError, startLoading, stopLoading } from "../../actions/index";
+import { showAlert, startLoading, stopLoading } from "../../actions/index";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  showError: showError,
+  showAlert: showAlert,
   startLoading: startLoading,
   stopLoading: stopLoading,
 };

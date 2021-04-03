@@ -3,7 +3,7 @@ import "./Login.css";
 import Button from "../smallerComponents/Button";
 import LandingNavbar from "../smallerComponents/LandingNavbar";
 
-import { showError, startLoading, stopLoading } from "../../actions/index";
+import { showAlert, startLoading, stopLoading } from "../../actions/index";
 import { connect } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -12,20 +12,16 @@ import { useState } from "react";
 import Input from "../smallerComponents/Input";
 
 const mapStateToProps = (state) => {
-  return {
-    loading: state.loading,
-  };
+  return {};
 };
 
 const mapDispatchToProps = {
-  showError: showError,
+  showAlert: showAlert,
   startLoading: startLoading,
   stopLoading: stopLoading,
 };
 
 const Login = (props) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const [signinData, setSigninData] = useState({
     email: "",
     password: "",
@@ -43,21 +39,17 @@ const Login = (props) => {
     props.startLoading();
     axios.post(`http://localhost:5000/api/users/signin`, signinData).then(
       (response) => {
-        if (response.data.success) {
-          // console.log("pass", response.data);
-          localStorage.setItem("token", response.data.token);
-          props.stopLoading();
-          window.location.reload(false);
-        } else {
-          // console.log("failed", response.data.message);
-          props.stopLoading();
-          alert("Failed to signin.");
-        }
+        localStorage.setItem("token", response.data.token);
+        props.stopLoading();
+        window.location.reload(false);
       },
       (error) => {
         props.stopLoading();
-        // console.log("Error", error);
-        alert(error.response.data.message);
+        if(error.response) {
+          props.showAlert(error.response.data.message);
+        } else {
+          props.showAlert(error.message);
+        }
       }
     );
   };
@@ -80,7 +72,7 @@ const Login = (props) => {
               <Input
                 name="email"
                 label="Email"
-                type="text"
+                type="email"
                 placeholder="Enter email here"
                 minLength="5"
                 maxLength="30"

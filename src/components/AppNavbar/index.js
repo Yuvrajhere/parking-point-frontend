@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import parkingPointLogo from "../../assets/images/parking-point-logo.png";
 import iconSearchOutlined from "../../assets/images/icon-search-outlined.svg";
 import { connect } from "react-redux";
-import { startLoading, stopLoading, showError, setSearchText } from "../../actions/index";
+import { startLoading, stopLoading, showAlert, setSearchText } from "../../actions/index";
 import axios from "axios";
 
 const mapStateToProps = (state) => {
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   startLoading: startLoading,
   stopLoading: stopLoading,
-  showError: showError,
+  showAlert: showAlert,
   setSearchText: setSearchText
 };
 

@@ -63,7 +63,7 @@ const LandingPage = () => {
             <Button
               buttonType="sec-btn"
               handleClick={() => {
-                history.push("/signup");
+                history.push("/login");
               }}
             >
               Login

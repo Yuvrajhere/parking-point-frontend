@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./AdminLogin.css";
 import { Link } from "react-router-dom";
-import { showError, startLoading, stopLoading } from "../../actions/index";
+import { showAlert, startLoading, stopLoading } from "../../actions/index";
 import { connect } from "react-redux";
 import axios from "axios";
 
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  showError: showError,
+  showAlert: showAlert,
   startLoading: startLoading,
   stopLoading: stopLoading,
 };

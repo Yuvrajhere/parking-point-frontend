@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import {
   startLoading,
   stopLoading,
-  showError,
+  showAlert,
 } from "../../actions/index";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   startLoading: startLoading,
   stopLoading: stopLoading,
-  showError: showError,
+  showAlert: showAlert,
 };
 
 const Home = (props) => {

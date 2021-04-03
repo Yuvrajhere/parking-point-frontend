@@ -4,7 +4,7 @@ import Input from "../smallerComponents/Input";
 
 import { connect } from "react-redux";
 import axios from "axios";
-import { startLoading, stopLoading, showError } from "../../actions/index";
+import { startLoading, stopLoading, showAlert } from "../../actions/index";
 import "./Signup.css";
 import { Link, NavLink } from "react-router-dom";
 import googlePlayBadge from "../../assets/images/google-play-badge.png";
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   startLoading: startLoading,
   stopLoading: stopLoading,
-  showError: showError,
+  showAlert: showAlert,
 };
 
 const Signup = (props) => {

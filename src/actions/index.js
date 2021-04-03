@@ -10,16 +10,16 @@ export const stopLoading = () => {
   }
 }
 
-export const showError = (message) => {
+export const showAlert = (message) => {
   return {
-    type: "SHOW_ERROR",
+    type: "SHOW_ALERT",
     payload: message
   }
 }
 
-export const removeError = () => {
+export const removeAlert = () => {
   return {
-    type: "REMOVE_ERROR",
+    type: "REMOVE_ALERT",
   }
 }
 

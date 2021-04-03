@@ -21,20 +21,23 @@ import UserProfileEdit from "./components/UserProfileEdit";
 import Search from "./components/Search";
 import ParkingPoint from "./components/ParkingPoint";
 import UnknownPage from "./components/UnknownPage";
+import Alert from "./components/Alert";
 
 const mapStateToProps = (state) => {
   return {
     loading: state.loading,
-    error: state.error,
+    alert: state.alert,
   };
 };
 
 const App = (props) => {
+
   return (
     <Router>
       <div className="App">
 
         {props.loading && <Loading />}
+        {props.alert && <Alert />}
 
         <Switch>
           <PublicRoute component={Signup} path="/signup" exact />
