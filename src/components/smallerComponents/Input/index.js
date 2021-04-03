@@ -15,6 +15,7 @@ const Input = (props) => {
         value={props.value}
         onChange={props.handleInputChange}
         autoComplete={props.autoComplete}
+        readOnly={props.readOnly}
       />
     </div>
   );

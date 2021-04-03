@@ -4,6 +4,8 @@ import AppNavbar from "../AppNavbar";
 import { Link } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import Input from "../smallerComponents/Input";
+import Button from "../smallerComponents/Button";
 
 const UserProfileEdit = () => {
   const [userDetails, setUserDetails] = useState({});
@@ -11,7 +13,7 @@ const UserProfileEdit = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/api/users/user/${
+        `${process.env.REACT_APP_API_URL}/users/user/${
           jwtDecode(localStorage.getItem("token")).id
         }`
       )
@@ -36,24 +38,19 @@ const UserProfileEdit = () => {
         <div className="details-div">
           <h1>Your details</h1>
           <div className="details">
-            <div className="form-child">
-              <label>First Name</label>
-              <input value={userDetails.firstName} readOnly />
-            </div>
-            <div className="form-child">
-              <label>Last Name</label>
-              <input value={userDetails.lastName} readOnly />
-            </div>
-            <div className="form-child">
+            <Input label="First Name" value={userDetails.firstName} readOnly />
+            <Input label="Last Name" value={userDetails.lastName} readOnly />
+            {/* <div className="form-child">
               <label>Phone</label>
               <input value={userDetails.phone} readOnly />
-            </div>
+            </div> */}
+            <Input label="Phone Number" value={userDetails.phone} readOnly />
             <div>
               <Link to="/profile/edit">
-                <button className="submit-btn">Update</button>
+                <Button className="pri-btn">Update</Button>
               </Link>
               <Link to="/profile/">
-                <button className="sec-btn">Cancel</button>
+                <Button className="sec-btn">Cancel</Button>
               </Link>
             </div>
           </div>

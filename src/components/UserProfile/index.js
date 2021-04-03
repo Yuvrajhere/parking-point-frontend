@@ -3,7 +3,9 @@ import AppNavbar from "../AppNavbar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import Button from "../smallerComponents/Button";
+import Input from "../smallerComponents/Input";
 
 const UserProfile = () => {
   const [userDetails, setUserDetails] = useState({});
@@ -11,7 +13,7 @@ const UserProfile = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/api/users/user/${
+        `${process.env.REACT_APP_API_URL}/users/user/${
           jwtDecode(localStorage.getItem("token")).id
         }`
       )
@@ -36,27 +38,14 @@ const UserProfile = () => {
         <div className="details-div">
           <h1>Your details</h1>
           <div className="details">
-            <div className="form-child">
-              <label>First Name</label>
-              <input value={userDetails.firstName} readOnly/>
-            </div>
-            <div className="form-child">
-              <label>Last Name</label>
-              <input value={userDetails.lastName} readOnly/>
-            </div>
-            <div className="form-child">
-              <label>Email</label>
-              <input value={userDetails.email} readOnly/>
-            </div>
-            <div className="form-child">
-              <label>Phone</label>
-              <input value={userDetails.phone} readOnly/>
-            </div>
-            <div className="form-child">
-              <label>Balance</label>
-              <input value={userDetails.balance} readOnly/>
-            </div>
-          <Link to="/profile/edit"><button className="submit-btn">Edit</button></Link>
+            <Input label="First Name" value={userDetails.firstName} readOnly />
+            <Input label="Last Name" value={userDetails.lastName} readOnly />
+            <Input label="Email" value={userDetails.email} readOnly />
+            <Input label="Phone Number" value={userDetails.phone} readOnly />
+            <Input label="Balance" value={userDetails.balance} readOnly />
+            <Link to="/profile/edit">
+              <Button className="pri-btn">Edit</Button>
+            </Link>
           </div>
         </div>
       </main>
