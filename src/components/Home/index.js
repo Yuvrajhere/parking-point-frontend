@@ -2,15 +2,12 @@ import "./Home.css";
 import AppNavbar from "../AppNavbar";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  startLoading,
-  stopLoading,
-  showAlert,
-} from "../../actions/index";
+import { startLoading, stopLoading, showAlert } from "../../actions/index";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
 import iconInfoFilled from "../../assets/images/icon-info-filled.svg";
+import Button from "../smallerComponents/Button";
 
 const mapStateToProps = (state) => {
   return {
@@ -34,7 +31,7 @@ const Home = (props) => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/api/users/user/${
+        `${process.env.REACT_APP_API_URL}/users/user/${
           jwtDecode(localStorage.getItem("token")).id
         }`
       )
@@ -74,7 +71,9 @@ const Home = (props) => {
             <div>
               <h1>You dont have any booked parking right now!</h1>
               <p>Lets find a good parking for you!</p>
-              <Link to="/search"><button className="submit-btn">Go to Search Page</button></Link>
+              <Link to="/search">
+                <Button className="pri-btn">Go to Search Page</Button>
+              </Link>
             </div>
           </div>
         </div>
