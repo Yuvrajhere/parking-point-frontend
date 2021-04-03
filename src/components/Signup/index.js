@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { startLoading, stopLoading, showAlert } from "../../actions/index";
 import "./Signup.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import googlePlayBadge from "../../assets/images/google-play-badge.png";
 import parkingPointLogo from "../../assets/images/parking-point-logo.png";
 
@@ -25,6 +25,8 @@ const mapDispatchToProps = {
 };
 
 const Signup = (props) => {
+  const history = useHistory();
+
   const [signupData, setSignUpData] = useState({
     firstName: "",
     lastName: "",
@@ -43,7 +45,7 @@ const Signup = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(signupData);
+    props.startLoading();
     if (signupData.password1 === signupData.password2) {
       let data = {
         ...signupData,
@@ -51,35 +53,34 @@ const Signup = (props) => {
         password1: undefined,
         password2: undefined,
       };
-      props.startLoading();
       axios
-        .post("http://localhost:5000/api/users", data)
+        .post(`${process.env.REACT_APP_API_URL}/users/`, data)
         .then((res) => {
-          if (res.data.success) {
-            console.log(res);
-            setSignUpData({
-              firstName: "",
-              lastName: "",
-              email: "",
-              phone: "",
-              password1: "",
-              password2: "",
-            });
-            props.stopLoading();
-            window.location.reload(false);
-          } else {
-            // console.log("failed", response.data.message);
-            props.stopLoading();
-            alert("Failed to signup.");
-          }
-        })
-        .catch((err) => {
-          // console.log(err)
+          console.log(res)
+          console.log(res.data.message);
+          setSignUpData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            phone: "",
+            password1: "",
+            password2: "",
+          });
           props.stopLoading();
-          alert("Failed to signup.");
+          props.showAlert(res.data.message + ", You can now login!");
+          history.push("/login");
+        })
+        .catch((error) => {
+          props.stopLoading();
+          if (error.response) {
+            props.showAlert(error.response.data.message);
+          } else {
+            props.showAlert(error.message + ", Please try again after some time!");
+          }
         });
     } else {
-      alert("Passwords do not match!");
+      props.showAlert("Passwords do not match!");
+      props.stopLoading();
     }
   };
 
@@ -125,7 +126,7 @@ const Signup = (props) => {
               />
 
               <Input
-                type="text"
+                type="email"
                 name="email"
                 label="Email"
                 placeholder="Enter email here"
@@ -141,9 +142,9 @@ const Signup = (props) => {
                 type="text"
                 name="phone"
                 label="Phone Number"
-                placeholder="Enter phone number here"
-                minLength="5"
-                maxLength="30"
+                placeholder="Enter 10-digit phone number here"
+                minLength="10"
+                maxLength="10"
                 required
                 value={signupData.phone}
                 handleInputChange={handleInputChange}
