@@ -72,7 +72,7 @@ const Home = (props) => {
               <h1>You dont have any booked parking right now!</h1>
               <p>Lets find a good parking for you!</p>
               <Link to="/search">
-                <Button className="pri-btn">Go to Search Page</Button>
+                <Button buttonType="pri-btn">Go to Search Page</Button>
               </Link>
             </div>
           </div>

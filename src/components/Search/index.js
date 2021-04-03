@@ -45,7 +45,7 @@ const Search = (props) => {
   const fetchParkings = () => {
     props.startLoading();
     axios
-      .get(`http://localhost:5000/api/parkingpoints/city/${props.searchText}`)
+      .get(`${process.env.API_URL}/parkingpoints/city/${props.searchText}`)
       .then(
         (response) => {
           if (response.data.success) {
