@@ -54,7 +54,7 @@ const Home = (props) => {
       <main>
         <div className="main-a">
           <div className="about">
-            <h2>{userDetails.firstName + " " + userDetails.lastName}</h2>
+            <h2>{(userDetails.firstName || "") + " " + (userDetails.lastName || "")}</h2>
             <div className="coins">
               <p className="coins-count">
                 {(userDetails.coins || 150) + " PP"}
