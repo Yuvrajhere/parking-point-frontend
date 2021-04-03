@@ -40,10 +40,6 @@ const UserProfileEdit = () => {
           <div className="details">
             <Input label="First Name" value={userDetails.firstName} readOnly />
             <Input label="Last Name" value={userDetails.lastName} readOnly />
-            {/* <div className="form-child">
-              <label>Phone</label>
-              <input value={userDetails.phone} readOnly />
-            </div> */}
             <Input label="Phone Number" value={userDetails.phone} readOnly />
             <div>
               <Link to="/profile/edit">
