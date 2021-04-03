@@ -22,53 +22,6 @@ a {
   text-decoration: none;
 }
 
-/* .form-child {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-.form-child label {
-  font-size: 18px;
-  color: #fff;
-  margin-bottom: 5px;
-}
-
-.form-child input {
-  font-size: 14px;
-  padding: 10px;
-  width: 260px;
-  border-radius: 3px;
-  border: none;
-}
-
-.form-child input::placeholder {
-  color: #000;
-}
-
-.form-child input:focus {
-  background-color: #ffc62d;
-  color: #000;
-}
-
-.submit-btn {
-  padding: 10px 30px;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  border-radius: 3px;
-  transition: 500ms ease-out;
-  background-color: #ffc62d;
-  border: 2px solid #ffc62d;
-  margin-top: 10px;
-}
-
-.submit-btn:hover {
-  background-color: #000;
-  border: 2px solid #ffc62d;
-  color: #ffc62d;
-} */
-
 .main-container {
   background: url("./assets/images/landing_page_main.jpg") no-repeat center;
   background-size: cover;
@@ -118,23 +71,6 @@ a {
 .home-search button img {
   height: 20px !important;
 }
-
-/* .sec-btn {
-  padding: 10px 30px;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  border-radius: 3px;
-  transition: 500ms ease-out;
-  background-color: #fbfbfb;
-  border: 2px solid #fbfbfb;
-}
-
-.sec-btn:hover {
-  background-color: #000;
-  border: 2px solid #fbfbfb;
-  color: #fbfbfb;
-} */
 
 .App {
   position: relative;
