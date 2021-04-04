@@ -110,14 +110,14 @@
   border-radius: 5px;
 }
 
-.history > div {
+.history > .no-history {
   height: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.history > div > p {
+.history > .no-history > p {
   width: 60%;
   font-size: 18px;
   text-align: center;
@@ -139,14 +139,14 @@
   border-radius: 5px;
 }
 
-.saved-parkings > div {
+.saved-parkings > .no-saved-parkings {
   height: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.saved-parkings > div > p {
+.saved-parkings > .no-saved-parkings > p {
   width: 70%;
   font-size: 18px;
   text-align: center;
@@ -156,12 +156,12 @@
   .Home main {
     padding: 0 5% 20px 5%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
+    display: block;
   }
   
   .Home .main-a {
     width: 100%;
+    margin-bottom: 20px;
   }
   
   .Home .main-a .about {
@@ -193,7 +193,39 @@
     font-size: 28px;
   }
   
-  .Home main .main-b {
-    display: none;
+  /* main-b */
+
+  .Home .main-b {
+    width: 100%;
+    display: block;
+  }
+  
+  .Home .main-b .history {
+    height: 100%;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+  }
+  
+  .Home .history > h2 {
+    font-size: 24px;
+    padding: 5px 20px;
+  }
+  
+  .history > .no-history {
+    height: 30vh;
+  }
+  
+  .Home .main-b .saved-parkings {
+    height: 100%;
+    padding: 10px 20px;
+  }
+  
+  .saved-parkings > h2 {
+    font-size: 24px;
+    padding: 5px 20px;
+  }
+  
+  .saved-parkings > .no-saved-parkings {
+    height: 30vh;
   }
 }

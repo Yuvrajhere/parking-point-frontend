@@ -80,13 +80,13 @@ const Home = (props) => {
         <div className="main-b">
           <div className="history">
             <h2>History</h2>
-            <div>
+            <div className="no-history">
               <p>You dont have any Parking history!</p>
             </div>
           </div>
           <div className="saved-parkings">
             <h2>Saved Parking Points</h2>
-            <div>
+            <div className="no-saved-parkings">
               <p>You dont have any Saved Parking Points!</p>
             </div>
           </div>
