@@ -5,7 +5,7 @@
   border: none;
   border-radius: 3px;
   transition: 500ms ease-out;
-  min-width: 140px
+  min-width: 140px;
 }
 
 .pri-btn {
@@ -32,7 +32,14 @@
 
 @media screen and (max-width: 800px) {
   .btn {
-  padding: 8px 20px;
-  font-size: 14px;
+    padding: 8px 20px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .btn {
+    min-width: 60px;
+    padding: 4px 20px;
   }
 }

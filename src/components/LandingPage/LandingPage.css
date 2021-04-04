@@ -410,7 +410,6 @@ header:before {
 }
 
 @media screen and (max-width: 800px) {
-
   .LandingPage .main-a {
     width: 100%;
   }
@@ -536,5 +535,56 @@ header:before {
 
   .LandingPage .contact .contact-links {
     margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .LandingPage .main-a h1 {
+    font-size: 28px;
+  }
+
+  .LandingPage .main-a p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+
+  .LandingPage main .main-b {
+    padding-bottom: 20px;
+  }
+
+  .LandingPage .main-b h2 {
+    font-size: 20px;
+  }
+
+  .LandingPage .main-b p {
+    font-size: 14px;
+  }
+
+  /* start of feature */
+
+  .LandingPage .features h1:nth-of-type(1) {
+    right: -290px;
+    font-size: 28px;
+  }
+
+  .LandingPage .features h1:nth-of-type(2) {
+    right: -288px;
+    font-size: 28px;
+  }
+
+  .LandingPage .features .features-list {
+    margin: 60% 5% 0 0;
+  }
+
+  .LandingPage .feature {
+    margin-right: 20px;
+  }
+
+  .LandingPage .feature h2 {
+    font-size: 18px;
+  }
+
+  .LandingPage .feature p {
+    font-size: 14px;
   }
 }
