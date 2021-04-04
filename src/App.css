@@ -29,49 +29,6 @@ a {
   height: 100vh;
 }
 
-.signout {
-  background: rgb(167, 5, 5);
-  color: #fff;
-  border: 1px solid #000;
-  padding: 2px 4px;
-  cursor: pointer;
-}
-
-.home-search {
-  display: flex;
-}
-
-.home-search input, select {
-  font-size: 14px;
-  padding: 10px;
-  width: 260px;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-  border: 1px solid #fbfbfb;
-}
-
-.home-search input::placeholder, select::placeholder {
-  color: #000;
-}
-
-.home-search input:focus, select:focus {
-  background-color: #ffc62d;
-  border: 1px solid #ffc62d;
-}
-
-.home-search button {
-  padding: 5px 10px 2px 10px;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  border: 1px solid #ffc62d;
-  background-color: #ffc62d;
-  cursor: pointer;
-}
-
-.home-search button img {
-  height: 20px !important;
-}
-
 .App {
   position: relative;
 }

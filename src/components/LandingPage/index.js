@@ -5,10 +5,8 @@ import LandingNavbar from "../smallerComponents/LandingNavbar";
 import BrandLogo from "../smallerComponents/BrandLogo";
 
 import { Link, NavLink, useHistory } from "react-router-dom";
-import { useState } from "react";
 
 import googlePlayBadge from "../../assets/images/google-play-badge.png";
-import parkingPointLogo from "../../assets/images/parking-point-logo.png";
 
 import hand from "../../assets/images/hand.png";
 import boyOnRocket from "../../assets/images/boy-on-rocket.png";

@@ -30,6 +30,19 @@
   color: #fbfbfb;
 }
 
+.danger-btn {
+  background-color: #c22323;
+  color: #fbfbfb;
+  padding: 5px 10px;
+  min-width: 0;
+  font-size: 14px;
+}
+
+.danger-btn:hover {
+  background-color: #ffc62d;
+  color: #000;
+}
+
 @media screen and (max-width: 800px) {
   .btn {
     padding: 8px 20px;

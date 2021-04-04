@@ -49,7 +49,7 @@ const Home = (props) => {
   }, []);
 
   return (
-    <div className="Home">
+    <div className="Home main-container">
       <AppNavbar />
       <main>
         <div className="main-a">
@@ -57,7 +57,7 @@ const Home = (props) => {
             <h2>{(userDetails.firstName || "") + " " + (userDetails.lastName || "")}</h2>
             <div className="coins">
               <p className="coins-count">
-                {(userDetails.coins || 150) + " PP"}
+                {(userDetails.balance) + " PP"}
               </p>
               <img src={iconInfoFilled} />
               <p className="coin-info">
@@ -68,7 +68,7 @@ const Home = (props) => {
           </div>
           <div className="booked-parking">
             <h2>Booked Parking</h2>
-            <div>
+            <div className="no-booked-parking">
               <h1>You dont have any booked parking right now!</h1>
               <p>Lets find a good parking for you!</p>
               <Link to="/search">

@@ -1,13 +1,3 @@
-.Home {
-  min-width: 100vw;
-  min-height: 100vh;
-  background-color: #181816;
-  color: #fff;
-  background: url("../../assets/images/landing_page_main.jpg") no-repeat center;
-  background-size: cover;
-  box-shadow: inset 0 0 30em 6em #000000;
-}
-
 .Home main {
   padding: 20px 5%;
   width: 100%;
@@ -39,7 +29,6 @@
 }
 
 .Home .coins .coins-count {
-  font-size: 600;
   margin-right: 5px;
   background-color: #ffc62d;
   border-radius: 5px;
@@ -78,7 +67,7 @@
   border-radius: 5px;
 }
 
-.Home .booked-parking > div {
+.Home .booked-parking > .no-booked-parking {
   margin-top: 10%;
   display: flex;
   flex-direction: column;
@@ -86,13 +75,13 @@
   justify-content: center;
 }
 
-.Home .booked-parking > div h1 {
+.Home .booked-parking > .no-booked-parking h1 {
   width: 60%;
   text-align: center;
   font-size: 32px;
 }
 
-.Home .booked-parking > div p {
+.Home .booked-parking > .no-booked-parking p {
   color: #fff;
   font-size: 18px;
   margin: 10px auto 20px auto;
@@ -163,3 +152,48 @@
   text-align: center;
 }
 
+@media screen and (max-width: 800px) {
+  .Home main {
+    padding: 0 5% 20px 5%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .Home .main-a {
+    width: 100%;
+  }
+  
+  .Home .main-a .about {
+    padding: 10px 20px;
+  }
+
+  .Home .main-a .about h2 {
+    width: 50vw;
+    font-size: 24px;
+  }
+  
+  .Home .coins .coin-info {
+    top: 70px;
+  }
+  
+  /* booked parking */
+  .Home .booked-parking > h2 {
+    font-size: 24px;
+    padding: 5px 20px;
+  }
+  
+  .Home .booked-parking > .no-booked-parking {
+    margin-top: 0;
+    margin: 40px auto;
+  }
+  
+  .Home .booked-parking > .no-booked-parking h1 {
+    width: 100%;
+    font-size: 28px;
+  }
+  
+  .Home main .main-b {
+    display: none;
+  }
+}
