@@ -155,7 +155,7 @@
 @media screen and (max-width: 800px) {
   .Home main {
     padding: 0 5% 20px 5%;
-    height: 100%;
+    height: auto;
     display: block;
   }
   
