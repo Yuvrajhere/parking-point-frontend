@@ -31,14 +31,17 @@ const Home = (props) => {
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_API_URL}/users/user/${
-          jwtDecode(localStorage.getItem("token")).id
-        }`
+        `${process.env.REACT_APP_API_URL}/users/user/`, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`
+          }
+        }
       )
       .then((res) => {
         if (res.data.success) {
           setUserDetails(res.data.data);
         } else {
+          console.log(res)
           alert("Failed to load data!");
         }
       })
@@ -57,7 +60,7 @@ const Home = (props) => {
             <h2>{(userDetails.firstName || "") + " " + (userDetails.lastName || "")}</h2>
             <div className="coins">
               <p className="coins-count">
-                {(userDetails.balance) + " PP"}
+                {(userDetails.balance || "") + " PP"}
               </p>
               <img src={iconInfoFilled} />
               <p className="coin-info">
