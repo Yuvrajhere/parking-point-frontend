@@ -39,6 +39,10 @@
   .UserProfileEdit .details-div h1 {
     margin-bottom: 20px;
   }
+
+  .UserProfileEdit .btn {
+    min-width: 80px;
+  }
   
   .UserProfileEdit .pri-btn {
     margin-right: 10px;
