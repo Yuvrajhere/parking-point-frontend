@@ -1,7 +1,7 @@
 import "./Home.css";
 import AppNavbar from "../AppNavbar";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { startLoading, stopLoading, showAlert } from "../../actions/index";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
@@ -22,6 +22,9 @@ const mapDispatchToProps = {
 };
 
 const Home = (props) => {
+
+  const history = useHistory();
+
   const [userDetails, setUserDetails] = useState({
     booking: [],
     vehicles: [],
@@ -29,25 +32,31 @@ const Home = (props) => {
   });
 
   useEffect(() => {
+    props.startLoading();
     axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/users/user/`, {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("token")}`
-          }
-        }
-      )
+      .get(`${process.env.REACT_APP_API_URL}/users/user/`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((res) => {
-        if (res.data.success) {
-          setUserDetails(res.data.data);
-        } else {
-          console.log(res)
-          alert("Failed to load data!");
-        }
+        setUserDetails(res.data.data);
+        props.stopLoading();
       })
       .catch((err) => {
         console.log(err);
-        alert("Failed to load data!");
+        console.log(err.response);
+        if (err.response.status == 401) {
+          if (err.response.data.isTokenExpired == true) {
+            localStorage.removeItem("token");
+          }
+          history.push("/login")
+          props.showAlert(err.response.data.message);
+          props.stopLoading();
+        } else {
+          props.stopLoading();
+          props.showAlert("Failed to load data!");
+        }
       });
   }, []);
 
@@ -57,7 +66,11 @@ const Home = (props) => {
       <main>
         <div className="main-a">
           <div className="about">
-            <h2>{(userDetails.firstName || "") + " " + (userDetails.lastName || "")}</h2>
+            <h2>
+              {(userDetails.firstName || "") +
+                " " +
+                (userDetails.lastName || "")}
+            </h2>
             <div className="coins">
               <p className="coins-count">
                 {(userDetails.balance || "") + " PP"}
