@@ -26,6 +26,7 @@
 @media screen and (max-width: 800px) {
   .UserProfile main {
     height: auto;
+    display: block;
   }
   
   .UserProfile .details-div {
