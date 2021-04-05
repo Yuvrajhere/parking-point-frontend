@@ -1,21 +1,10 @@
 .AdminSignin {
-  background: #4ca1af; 
-  background: -webkit-linear-gradient(
-    to right,
-    #c4e0e5,
-    #4ca1af
-  ); 
-  background: linear-gradient(
-    to right,
-    #c4e0e5,
-    #4ca1af
-  ); 
-
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: none;
 }
 
 .AdminSignin form {
@@ -24,10 +13,13 @@
   border: 2px solid #000;
   padding: 40px 80px;
   background-color: #000;
+  border-radius: 10px;
+  border: 2px solid #ffc62d;
 }
 
 .AdminSignin form h1 {
   color: #fff; 
   text-align: center;
   margin-bottom: 40px;
+  color: #ffc62d;
 }

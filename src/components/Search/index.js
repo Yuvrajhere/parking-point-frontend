@@ -81,7 +81,7 @@ const Search = (props) => {
   }, [props.searchText]);
 
   return (
-    <div className="Search">
+    <div className="Search main-container">
       <AppNavbar/>
       <main>
         <div className="main-a">

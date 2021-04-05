@@ -4,6 +4,20 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import Input from "../smallerComponents/Input";
+import Button from "../smallerComponents/Button";
+import { startLoading, stopLoading, showAlert } from "../../actions/index";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = {
+  startLoading: startLoading,
+  stopLoading: stopLoading,
+  showAlert: showAlert,
+};
 
 const AdminDashboard = () => {
   const [adminDetails, setAdminDetails] = useState({});
@@ -11,7 +25,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/api/admins/admin/${
+        `${process.env.REACT_APP_API_URL}/admins/admin/${
           jwtDecode(localStorage.getItem("token")).id
         }`
       )
@@ -28,39 +42,17 @@ const AdminDashboard = () => {
       });
   }, []);
 
-  console.log(adminDetails);
-
-  //   -	First name - String
-  // -	Last name – String
-  // -	Email - String
-  // -	Phone - String
-  // -	Password - String
-  // -	Parking points – array of Object (Parking Point ) [ HOLD ]
-  // -	Timestamps ON
-
   return (
-    <div className="AdminDashboard">
+    <div className="AdminDashboard main-container">
       <AdminNavbar />
       <main>
         <div className="main-a">
           <h2>Admin Details</h2>
           <div className="details">
-            <div className="form-child">
-              <label>First Name</label>
-              <input type="text" value={"Yuvraj Singh"} readOnly />
-            </div>
-            <div className="form-child">
-              <label>Last Name</label>
-              <input type="text" value={"Chouhan"} readOnly />
-            </div>
-            <div className="form-child">
-              <label>Email</label>
-              <input type="text" value={"yuvrajisbest13@gmail.com"} readOnly />
-            </div>
-            <div className="form-child">
-              <label>Phone</label>
-              <input type="text" value={"7204631052"} readOnly />
-            </div>
+            <Input label="First Name" value={adminDetails.firstName} readOnly />
+            <Input label="Last Name" value={adminDetails.lastName} readOnly />
+            <Input label="Email" value={adminDetails.email} readOnly />
+            <Input label="Phone Number" value={adminDetails.phone} readOnly />
           </div>
         </div>
         <div className="main-b">
@@ -70,7 +62,7 @@ const AdminDashboard = () => {
               <p>Create a new Parking Point!</p>
             </div>
             <Link to="/admin/parkingpoints/new">
-              <button className="submit-btn">Create Parking Point</button>
+              <Button buttonType="pri-btn">Create Parking Point</Button>
             </Link>
           </div>
           <div>
@@ -79,7 +71,7 @@ const AdminDashboard = () => {
               <p>View list of all Parking Points created by you!</p>
             </div>
             <Link to="/admin/parkingpoints">
-              <button className="submit-btn">View Parking Points</button>
+              <Button buttonType="pri-btn">View Parking Points</Button>
             </Link>
           </div>
           <div>
@@ -88,7 +80,7 @@ const AdminDashboard = () => {
               <p>Add Parking Type to a Parking Point!</p>
             </div>
             <Link to="/admin/parkings/new">
-              <button className="submit-btn">Create Parking</button>
+              <Button buttonType="pri-btn">Create Parking</Button>
             </Link>
           </div>
           <div>
@@ -97,24 +89,13 @@ const AdminDashboard = () => {
               <p>View list of all Parkings created by you!</p>
             </div>
             <Link to="/admin/parkings">
-              <button className="submit-btn">View Parkings</button>
+              <Button buttonType="pri-btn">View Parkings</Button>
             </Link>
           </div>
         </div>
-
-        {/* <Link to="/admin/parkingpoints/new"></Link>
-        <Link to="/admin/parkingpoints">
-          <h2>View Parking Points</h2>
-        </Link>
-        <Link to="/admin/parkings/new">
-          <h2>Create Parking</h2>
-        </Link>
-        <Link to="/admin/parkings">
-          <h2>View Parkings</h2>
-        </Link> */}
       </main>
     </div>
   );
 };
 
-export default AdminDashboard;
+export default connect(mapStateToProps, mapDispatchToProps)(AdminDashboard);

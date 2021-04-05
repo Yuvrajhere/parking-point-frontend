@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "./AdminLogin.css";
-import { Link } from "react-router-dom";
 import { showAlert, startLoading, stopLoading } from "../../actions/index";
 import { connect } from "react-redux";
 import axios from "axios";
+import Input from "../smallerComponents/Input";
+import Button from "../smallerComponents/Button";
 
 const mapStateToProps = (state) => {
   return {
@@ -32,57 +33,53 @@ const AdminLogin = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:5000/api/admins/signin`, signinData).then(
+    props.showAlert();
+    axios.post(`${process.env.REACT_APP_API_URL}/admins/signin`, signinData).then(
       (response) => {
-        if (response.data.success) {
           console.log("pass", response.data);
           localStorage.setItem("token", response.data.token);
           window.location.reload(false);
-        } else {
-          console.log("failed", response.data.message);
-          alert("Failed to signin.");
-        }
+          props.stopLoading();
       },
       (error) => {
         console.log("Error", error);
-        alert("Error occured!");
+        if(error.response.message) {
+          props.showAlert("Error occured! " + error.response.message);
+        } else {
+          props.showAlert("Unknown error occured!");
+        }
+        props.stopLoading();
       }
     );
   };
 
   return (
-    <div className="AdminSignin">
+    <div className="AdminSignin main-container">
       <form onSubmit={handleSubmit}>
         <h1>ADMIN LOGIN</h1>
-        <div className="form-child">
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            id="email"
-            placeholder="Enter email here"
-            minLength="5"
-            maxLength="30"
-            required
-            name="email"
-            value={signinData.email}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-child">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter password here"
-            minLength="6"
-            maxLength="10"
-            required
-            name="password"
-            value={signinData.password}
-            onChange={handleInputChange}
-          />
-        </div>
-        <input className="submit-btn" type="submit" value="Login As Admin" />
+        <Input
+          label="Email"
+          name="email"
+          type="email"
+          placeholder="Enter email here"
+          minLength="5"
+          maxLength="30"
+          required
+          value={signinData.email}
+          handleInputChange={handleInputChange}
+        />
+        <Input
+          label="Password"
+          name="password"
+          type="password"
+          placeholder="Enter password here"
+          minLength="6"
+          maxLength="10"
+          required
+          value={signinData.password}
+          handleInputChange={handleInputChange}
+        />
+        <Button buttonType="pri-btn">Login As Admin</Button>
       </form>
     </div>
   );

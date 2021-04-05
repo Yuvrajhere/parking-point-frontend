@@ -4,15 +4,12 @@ import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { startLoading, stopLoading, showAlert } from "../../actions/index";
 import axios from "axios";
-import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
 import iconInfoFilled from "../../assets/images/icon-info-filled.svg";
 import Button from "../smallerComponents/Button";
 
 const mapStateToProps = (state) => {
-  return {
-    error: state.error,
-  };
+  return {};
 };
 
 const mapDispatchToProps = {
@@ -22,7 +19,6 @@ const mapDispatchToProps = {
 };
 
 const Home = (props) => {
-
   const history = useHistory();
 
   const [userDetails, setUserDetails] = useState({
@@ -50,13 +46,12 @@ const Home = (props) => {
           if (err.response.data.isTokenExpired == true) {
             localStorage.removeItem("token");
           }
-          history.push("/login")
+          history.push("/login");
           props.showAlert(err.response.data.message);
-          props.stopLoading();
         } else {
-          props.stopLoading();
           props.showAlert("Failed to load data!");
         }
+        props.stopLoading();
       });
   }, []);
 

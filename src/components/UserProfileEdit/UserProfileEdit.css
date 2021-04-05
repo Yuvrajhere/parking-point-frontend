@@ -1,13 +1,3 @@
-.UserProfileEdit {
-  min-width: 100vw;
-  min-height: 100vh;
-  background-color: #181816;
-  color: #fff;
-  background: url("../../assets/images/landing_page_main.jpg") no-repeat center;
-  background-size: cover;
-  box-shadow: inset 0 0 30em 6em #000000;
-}
-
 .UserProfileEdit main {
   padding: 20px 5%;
   width: 100%;
@@ -33,6 +23,24 @@
   margin-bottom: 40px;
 }
 
-.UserProfileEdit .submit-btn {
-  margin-right: 30px;
+.UserProfileEdit .pri-btn {
+  margin-right: 20px;
+}
+
+@media screen and (max-width: 800px) {
+  .UserProfileEdit main {
+    height: auto;
+  }
+  
+  .UserProfileEdit .details-div {
+    width: 100%;
+  }
+  
+  .UserProfileEdit .details-div h1 {
+    margin-bottom: 20px;
+  }
+  
+  .UserProfileEdit .pri-btn {
+    margin-right: 10px;
+  }
 }

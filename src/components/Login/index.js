@@ -37,21 +37,23 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.startLoading();
-    axios.post(`${process.env.REACT_APP_API_URL}/users/signin`, signinData).then(
-      (response) => {
-        localStorage.setItem("token", response.data.token);
-        props.stopLoading();
-        window.location.reload(false);
-      },
-      (error) => {
-        props.stopLoading();
-        if(error.response) {
-          props.showAlert(error.response.data.message);
-        } else {
-          props.showAlert(error.message);
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/users/signin`, signinData)
+      .then(
+        (response) => {
+          localStorage.setItem("token", response.data.token);
+          props.stopLoading();
+          window.location.reload(false);
+        },
+        (error) => {
+          props.stopLoading();
+          if (error.response) {
+            props.showAlert(error.response.data.message);
+          } else {
+            props.showAlert(error.message);
+          }
         }
-      }
-    );
+      );
   };
 
   return (
