@@ -80,6 +80,11 @@
   margin-top: 10px;
 }
 
+.Search .parking-card p:first-of-type {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
 @media screen and (max-width: 800px) {
   .Search main {
     padding: 10px 5%;

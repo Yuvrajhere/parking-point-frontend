@@ -1,13 +1,3 @@
-.ParkingPoint {
-  min-width: 100vw;
-  min-height: 100vh;
-  background-color: #181816;
-  color: #fff;
-  background: url("../../assets/images/landing_page_main.jpg") no-repeat center;
-  background-size: cover;
-  box-shadow: inset 0 0 30em 6em #000000;
-}
-
 .ParkingPoint main {
   padding: 20px 5%;
   height: 83vh;
@@ -54,16 +44,23 @@
 .ParkingPoint .main-b .details {
   display: flex;
   flex-direction: column;
-  background-color: #ffc62d;
+  background-color: #181816;
+  color: #fff;
   padding: 20px;
   border-radius: 5px;
-  color: #000;
   margin: 20px 0;
+}
+
+.ParkingPoint .details h3 {
+  font-size: 28px;
+  color: #ffc62d;
+  margin-bottom: 10px;
 }
 
 .ParkingPoint .main-b .details > div {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .ParkingPoint .main-b .parkings {
@@ -72,9 +69,36 @@
 }
 
 .ParkingPoint .main-b .parkings > div {
-  background-color: #ffc62d;
+  background-color: #181816;
+  color: #fff;
   padding: 20px;
   border-radius: 5px;
-  color: #000;
   margin-top: 20px;
+}
+
+.ParkingPoint .parkings > div p:first-of-type {
+  font-size: 24px;
+}
+
+.ParkingPoint .parkings .btn {
+  margin-top: 10px;
+}
+
+@media screen and (max-width : 800px) {
+  .ParkingPoint main {
+    padding-top: 0;
+    height: auto;
+    flex-direction: column;
+  }
+  
+  .ParkingPoint main .main-a {
+    padding: 3px;
+    width: 100%;
+    height: 30vh;
+  }
+
+  .ParkingPoint main .main-b {
+    width: 100%;
+    margin-top: 10px;
+  }
 }

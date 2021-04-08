@@ -1,10 +1,26 @@
 import "./ParkingPoint.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppNavbar from "../AppNavbar";
 import iconLocationPinYellow from "../../assets/images/icon-location-pin-yellow.png";
 import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
+import axios from "axios";
+import { startLoading, stopLoading, showAlert } from "../../actions/index";
+import { connect } from "react-redux";
+import Input from "../smallerComponents/Input";
+import Button from "../smallerComponents/Button";
+import { Link, useHistory, useParams } from "react-router-dom";
 
-const ParkingPoint = () => {
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = {
+  startLoading: startLoading,
+  stopLoading: stopLoading,
+  showAlert: showAlert,
+};
+
+const ParkingPoint = (props) => {
   const [viewport, setViewport] = useState({
     width: "100%",
     height: "100%",
@@ -15,12 +31,88 @@ const ParkingPoint = () => {
     pitch: 0,
   });
 
+  const [parkingPointDetails, setParkingPointDetails] = useState({});
+
+  const [parkings, setParkings] = useState([]);
+
   const handleViewPortChange = (viewport) => {
     setViewport(viewport);
   };
 
+  const { parkingPointId } = useParams();
+
+  const history = useHistory();
+
+  useEffect(() => {
+    props.startLoading();
+    axios
+      .get(
+        `${process.env.REACT_APP_API_URL}/parkings/parkingpoint/${parkingPointId}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        setParkings(response.data.data);
+        props.stopLoading();
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status == 401) {
+          if (error.response.data.isTokenExpired == true) {
+            localStorage.removeItem("token");
+          }
+          history.push("/login");
+          props.showAlert(error.response.data.message);
+        } else {
+          props.showAlert("Failed to load data!, Try again later.");
+        }
+        props.stopLoading();
+      });
+  }, []);
+
+  useEffect(() => {
+    props.startLoading();
+    axios
+      .get(
+        `${process.env.REACT_APP_API_URL}/parkingpoints/parkingpoint/${parkingPointId}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((response) => {
+        setParkingPointDetails(response.data.data);
+        setViewport((prevVieport) => ({
+          ...prevVieport,
+          latitude: response.data.data.latitude,
+          longitude: response.data.data.longitude,
+        }));
+        props.stopLoading();
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status == 401) {
+          if (error.response.data.isTokenExpired == true) {
+            localStorage.removeItem("token");
+          }
+          history.push("/login");
+          props.showAlert(error.response.data.message);
+        } else {
+          props.showAlert("Failed to load data!, Try again later.");
+        }
+        props.stopLoading();
+      });
+  }, []);
+
+  // /parkingpoint/:parkingPointId
+
   return (
-    <div className="ParkingPoint">
+    <div className="ParkingPoint main-container">
       <AppNavbar />
       <main>
         <div className="main-a">
@@ -34,8 +126,8 @@ const ParkingPoint = () => {
             >
               <div className="marker">
                 <Marker
-                  latitude={20.5937}
-                  longitude={78.9629}
+                  latitude={parkingPointDetails.latitude || 20.5937}
+                  longitude={parkingPointDetails.longitude || 78.9629}
                   offsetLeft={-20}
                   offsetTop={-40}
                 >
@@ -55,45 +147,34 @@ const ParkingPoint = () => {
           <h2>Parking Point Details</h2>
           <div className="details-div">
             <div className="details">
-              <p>Name</p>
-              <p>Address Line 1</p>
-              <p>Address Line 2</p>
+              <h3>{parkingPointDetails.name}</h3>
+              <p>{parkingPointDetails.addressLine1}</p>
+              <p>{parkingPointDetails.addressLine2}</p>
               <div>
-                <p>City</p>
-                <p>State</p>
+                <p>{parkingPointDetails.city}</p>
+                <p>{parkingPointDetails.pincode}</p>
+                <p>{parkingPointDetails.state}</p>
               </div>
               <div>
-                <p>Pin Code</p>
-                <p>Phone</p>
+                <p>{parkingPointDetails.phone}</p>
+                <p>{parkingPointDetails.email}</p>
               </div>
             </div>
             <div className="parkings-div">
               <h2>Parkings</h2>
               <div className="parkings">
-                <div>
-                  <p>Parking 1</p>
-                  <p>length</p>
-                  <p>width</p>
-                  <p>Height</p>
-                  <p>Price / Hour</p>
-                  <button>Book</button>
-                </div>
-                <div>
-                  <p>Parking 2</p>
-                  <p>length</p>
-                  <p>width</p>
-                  <p>Height</p>
-                  <p>Price / Hour</p>
-                  <button>Book</button>
-                </div>
-                <div>
-                  <p>Parking 3</p>
-                  <p>length</p>
-                  <p>width</p>
-                  <p>Height</p>
-                  <p>Price / Hour</p>
-                  <button>Book</button>
-                </div>
+                {parkings.map((parking) => {
+                  return (
+                    <div key={parking._id}>
+                      <p>{parking.name}</p>
+                      <p>{"Length : " + parking.length}</p>
+                      <p>{"Width : " + parking.width}</p>
+                      <p>{"Height : " + parking.height}</p>
+                      <p>{"Price / Hour : ₹" + parking.price}</p>
+                      <Link to={`/book/${parking._id}`}><Button buttonType="pri-btn">Book</Button></Link>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -116,4 +197,4 @@ const ParkingPoint = () => {
 // -	Email – String
 // -	Phone – String
 
-export default ParkingPoint;
+export default connect(mapStateToProps, mapDispatchToProps)(ParkingPoint);

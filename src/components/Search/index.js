@@ -6,7 +6,7 @@ import iconLocationPinWhite from "../../assets/images/icon-location-pin-white.pn
 import iconLocationPinYellow from "../../assets/images/icon-location-pin-yellow.png";
 import { connect } from "react-redux";
 import { showAlert, startLoading, stopLoading } from "../../actions/index";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
 const mapStateToProps = (state) => {
@@ -23,6 +23,8 @@ const mapDispatchToProps = {
 };
 
 const Search = (props) => {
+
+  const history = useHistory();
 
   const [parkings, setParkings] = useState([]);
 
@@ -45,44 +47,48 @@ const Search = (props) => {
   const fetchParkings = () => {
     props.startLoading();
     axios
-      .get(`${process.env.API_URL}/parkingpoints/city/${props.searchText}`)
+      .get(`${process.env.REACT_APP_API_URL}/parkingpoints/city/${props.searchText}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then(
         (response) => {
-          if (response.data.success) {
-            console.log("pass", response.data);
-            setParkings(response.data.data);
-            setViewport((prevViewport) => ({
-              ...prevViewport,
-              latitude: response.data.data[0].latitude,
-              longitude: response.data.data[0].longitude,
-              zoom: 10,
-            }));
-            props.stopLoading();
-          } else {
-            console.log("failed", response.data.message);
-            props.stopLoading();
-            alert("Failed to signin.");
-          }
+          // console.log("pass", response.data);
+          setParkings(response.data.data);
+          setViewport((prevViewport) => ({
+            ...prevViewport,
+            latitude: response.data.data[0].latitude,
+            longitude: response.data.data[0].longitude,
+            zoom: 10,
+          }));
+          props.stopLoading();
         },
         (error) => {
           console.log("Error", error);
-          if (error.response.status === 400) {
-            alert("No parking found in this city!");
+          if (error.response.status == 401) {
+            if (error.response.data.isTokenExpired == true) {
+              localStorage.removeItem("token");
+            }
+            history.push("/login");
+            props.showAlert(error.response.data.message);
+          } else if (error.response.status === 400) {
+            props.showAlert("No parking found in this city!");
           } else {
-            alert("Error occured!");
+            props.showAlert("Unknown Error occured!");
           }
           props.stopLoading();
         }
       );
   };
-  
+
   useEffect(() => {
     props.searchText && fetchParkings();
   }, [props.searchText]);
 
   return (
     <div className="Search main-container">
-      <AppNavbar/>
+      <AppNavbar />
       <main>
         <div className="main-a">
           <div>
@@ -95,7 +101,7 @@ const Search = (props) => {
             >
               {parkings.map((parking) => {
                 return (
-                  <Link to={`/parkingpoint/${parking._id}`}>
+                  <Link key={parking._id} to={`/parkingpoint/${parking._id}`}>
                     <div
                       className="marker"
                       key={parking._id}
@@ -143,24 +149,26 @@ const Search = (props) => {
               <div className="parking-list">
                 {parkings.map((parking) => {
                   return (
-                    <Link to={`/parkingpoint/${parking._id}`}><div
-                    key={parking._id}
-                    className={
-                      hoveredMarker == parking._id
-                        ? "parking-card hovered"
-                        : "parking-card"
-                    }
-                    onMouseEnter={(e) => {
-                      setHoveredMarker(parking._id);
-                    }}
-                    onMouseLeave={(e) => {
-                      setHoveredMarker("");
-                    }}
-                  >
-                    <p>{parking.name}</p>
-                    <p>{parking.addressLine1}</p>
-                    <p>{parking.addressLine2}</p>
-                  </div></Link>
+                    <Link key={parking._id} to={`/parkingpoint/${parking._id}`}>
+                      <div
+                        key={parking._id}
+                        className={
+                          hoveredMarker == parking._id
+                            ? "parking-card hovered"
+                            : "parking-card"
+                        }
+                        onMouseEnter={(e) => {
+                          setHoveredMarker(parking._id);
+                        }}
+                        onMouseLeave={(e) => {
+                          setHoveredMarker("");
+                        }}
+                      >
+                        <p>{parking.name}</p>
+                        <p>{parking.addressLine1}</p>
+                        <p>{parking.addressLine2}</p>
+                      </div>
+                    </Link>
                   );
                 })}
               </div>
