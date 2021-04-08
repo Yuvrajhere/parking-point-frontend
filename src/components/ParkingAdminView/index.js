@@ -2,99 +2,82 @@ import "./ParkingAdminView.css";
 import AdminNavbar from "../AdminNavbar";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import jwtDecode from "jwt-decode";
+import { Link, useHistory } from "react-router-dom";
+import { startLoading, stopLoading, showAlert } from "../../actions/index";
+import { connect } from "react-redux";
 
-const ParkingAdminView = () => {
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = {
+  startLoading: startLoading,
+  stopLoading: stopLoading,
+  showAlert: showAlert,
+};
+
+const ParkingAdminView = (props) => {
   const [parkings, setParkings] = useState([]);
 
+  const history = useHistory();
+
   useEffect(() => {
+    props.startLoading();
     axios
-      .get(
-        `http://localhost:5000/api/parkings/${
-          jwtDecode(localStorage.getItem("token")).id
-        }`
-      )
+      .get(`${process.env.REACT_APP_API_URL}/parkings/admin`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
         console.log(response);
-        if (response.data.success) {
-          setParkings(response.data.data);
-        }
+        setParkings(response.data.data);
+        props.stopLoading();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status == 401) {
+          if (error.response.data.isTokenExpired == true) {
+            localStorage.removeItem("token");
+          }
+          history.push("/login");
+          props.showAlert(error.response.data.message);
+        } else {
+          props.showAlert("Failed to create Parking Point!");
+        }
+        props.stopLoading();
+      });
   }, []);
 
   const handleDelete = (parkingId) => {
+    props.startLoading();
     axios
-      .delete(`http://localhost:5000/api/parkings/parking/${parkingId}`)
-      .then((res) => {
-        console.log(res);
+      .delete(`${process.env.REACT_APP_API_URL}/parkings/parking/${parkingId}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       })
-      .catch((err) => console.log(err));
+      .then((res) => {
+        props.stopLoading();
+        window.location.reload(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status == 401) {
+          if (error.response.data.isTokenExpired == true) {
+            localStorage.removeItem("token");
+          }
+          history.push("/login");
+          props.showAlert(error.response.data.message);
+        } else {
+          props.showAlert("Failed to delete Parking Point!");
+        }
+        props.stopLoading();
+      });
   };
 
   return (
-    /*<div className="ParkingPointsAdminView">
-      <AdminNavbar />
-      <main>
-        <div className="main-a">
-          <h1>Your Parking Points</h1>
-          <p>Count - {parkingPoints.length}</p>
-        </div>
-        <div className="main-b">
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>City</th>
-                <th>State</th>
-                <th>Pincode</th>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {parkingPoints.map((parkingPoint) => {
-                return (
-                  <tr key={parkingPoint._id}>
-                    <td>{parkingPoint._id}</td>
-                    <td>{parkingPoint.name}</td>
-                    <td>{parkingPoint.city}</td>
-                    <td>{parkingPoint.state}</td>
-                    <td>{parkingPoint.pincode}</td>
-                    <td>
-                      <Link
-                        to={`/admin/parkingpoint/details/${parkingPoint._id}`}
-                      >
-                        View
-                      </Link>
-                    </td>
-                    <td>
-                      <Link to={`/admin/parkingpoint/edit/${parkingPoint._id}`}>
-                        Edit
-                      </Link>
-                    </td>
-                    <td>
-                      <p
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleDelete(parkingPoint._id);
-                        }}
-                      >
-                        Delete
-                      </p>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </main>
-    </div> */
-    <div className="ParkingAdminView">
+    <div className="ParkingAdminView main-container">
       <AdminNavbar />
       <main>
         <div className="main-a">
@@ -119,36 +102,37 @@ const ParkingAdminView = () => {
               </tr>
             </thead>
             <tbody>
-              {parkings.map((parking) => {
-                return (
-                  <tr key={parking._id}>
-                    <td>{parking._id}</td>
-                    <td>{parking.name}</td>
-                    <td>{parking.maxCapacity}</td>
-                    <td>{parking.height}</td>
-                    <td>{parking.length}</td>
-                    <td>{parking.width}</td>
-                    <td>₹{parking.price}</td>
-                    <td>{parking.parkingPoint.name}</td>
-                    <td>{parking.parkingPoint.city}</td>
-                    <td>
-                      <Link to={`/admin/parking/edit/${parking._id}`}>
-                        Edit
-                      </Link>
-                    </td>
-                    <td>
-                      <p
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleDelete(parking._id);
-                        }}
-                      >
-                        Delete
-                      </p>
-                    </td>
-                  </tr>
-                );
-              })}
+              {parkings &&
+                parkings.map((parking) => {
+                  return (
+                    <tr key={parking._id}>
+                      <td>{parking._id}</td>
+                      <td>{parking.name}</td>
+                      <td>{parking.maxCapacity}</td>
+                      <td>{parking.height}</td>
+                      <td>{parking.length}</td>
+                      <td>{parking.width}</td>
+                      <td>₹{parking.price}</td>
+                      <td>{parking.parkingPoint.name}</td>
+                      <td>{parking.parkingPoint.city}</td>
+                      <td>
+                        <Link to={`/admin/parking/edit/${parking._id}`}>
+                          Edit
+                        </Link>
+                      </td>
+                      <td>
+                        <p
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleDelete(parking._id);
+                          }}
+                        >
+                          Delete
+                        </p>
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>
@@ -157,4 +141,4 @@ const ParkingAdminView = () => {
   );
 };
 
-export default ParkingAdminView;
+export default connect(mapStateToProps, mapDispatchToProps)(ParkingAdminView);

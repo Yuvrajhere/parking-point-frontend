@@ -1,9 +1,8 @@
 import "./AdminDashboard.css";
 import AdminNavbar from "../AdminNavbar";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import jwtDecode from "jwt-decode";
 import Input from "../smallerComponents/Input";
 import Button from "../smallerComponents/Button";
 import { startLoading, stopLoading, showAlert } from "../../actions/index";
@@ -19,26 +18,36 @@ const mapDispatchToProps = {
   showAlert: showAlert,
 };
 
-const AdminDashboard = () => {
+const AdminDashboard = (props) => {
   const [adminDetails, setAdminDetails] = useState({});
 
+  const history = useHistory();
+
   useEffect(() => {
+    props.startLoading();
     axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/admins/admin/${
-          jwtDecode(localStorage.getItem("token")).id
-        }`
-      )
+      .get(`${process.env.REACT_APP_API_URL}/admins/admin/`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((res) => {
-        if (res.data.success) {
-          setAdminDetails(res.data.data);
-        } else {
-          alert("Failed to load data!");
-        }
+        setAdminDetails(res.data.data);
+        props.stopLoading();
       })
       .catch((err) => {
         console.log(err);
-        alert("Failed to load data!");
+        console.log(err.response);
+        if (err.response.status == 401) {
+          if (err.response.data.isTokenExpired == true) {
+            localStorage.removeItem("token");
+          }
+          history.push("/login");
+          props.showAlert(err.response.data.message);
+        } else {
+          props.showAlert("Failed to load data!");
+        }
+        props.stopLoading();
       });
   }, []);
 

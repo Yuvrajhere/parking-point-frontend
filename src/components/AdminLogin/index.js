@@ -33,7 +33,7 @@ const AdminLogin = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.showAlert();
+    props.startLoading();
     axios.post(`${process.env.REACT_APP_API_URL}/admins/signin`, signinData).then(
       (response) => {
           console.log("pass", response.data);

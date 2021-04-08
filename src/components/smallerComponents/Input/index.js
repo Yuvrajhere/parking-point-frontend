@@ -14,8 +14,10 @@ const Input = (props) => {
         name={props.name}
         value={props.value}
         onChange={props.handleInputChange}
-        autoComplete={props.autoComplete}
+        autoComplete="off"
         readOnly={props.readOnly}
+        min={props.min}
+        max={props.max}
       />
     </div>
   );

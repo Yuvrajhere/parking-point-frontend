@@ -1,39 +1,81 @@
 import "./ParkingPointsAdminView.css";
 import AdminNavbar from "../AdminNavbar";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import jwtDecode from "jwt-decode";
+import { startLoading, stopLoading, showAlert } from "../../actions/index";
+import { connect } from "react-redux";
 
-const ParkingPointsAdminView = () => {
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = {
+  startLoading: startLoading,
+  stopLoading: stopLoading,
+  showAlert: showAlert,
+};
+
+const ParkingPointsAdminView = (props) => {
   const [parkingPoints, setParkingPoints] = useState([]);
 
+  const history = useHistory();
+
   useEffect(() => {
+    props.startLoading();
     axios
-      .get(
-        `http://localhost:5000/api/parkingpoints/${
-          jwtDecode(localStorage.getItem("token")).id
-        }`
-      )
-      .then((response) => {
-        console.log(response);
-        if (response.data.success) {
-          setParkingPoints(response.data.data);
-        }
+      .get(`${process.env.REACT_APP_API_URL}/parkingpoints/admin`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       })
-      .catch((error) => console.log(error));
+      .then((response) => {
+        setParkingPoints(response.data.data);
+        props.stopLoading();
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status == 401) {
+          if (error.response.data.isTokenExpired == true) {
+            localStorage.removeItem("token");
+          }
+          history.push("/login");
+          props.showAlert(error.response.data.message);
+        } else {
+          props.showAlert("Failed to load data!, Try again later.");
+        }
+        props.stopLoading();
+      });
   }, []);
 
   const handleDelete = (id) => {
+    props.startLoading();
     axios
-      .delete(`http://localhost:5000/api/parkingpoints/parkingpoint/${id}`)
+      .delete(
+        `${process.env.REACT_APP_API_URL}/parkingpoints/parkingpoint/${id}`, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
       .then((res) => {
         console.log(res);
+        window.location.reload(false);
       })
-      .catch((err) => console.log(err));
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status == 401) {
+          if (error.response.data.isTokenExpired == true) {
+            localStorage.removeItem("token");
+          }
+          history.push("/login");
+          props.showAlert(error.response.data.message);
+        } else {
+          props.showAlert("Failed to delete Parking Point.");
+        }
+        props.stopLoading();
+      });
   };
-
-  console.log("State: ", parkingPoints);
 
   return (
     <div className="ParkingPointsAdminView">
@@ -99,4 +141,7 @@ const ParkingPointsAdminView = () => {
   );
 };
 
-export default ParkingPointsAdminView;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ParkingPointsAdminView);

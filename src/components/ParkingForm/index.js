@@ -1,11 +1,25 @@
 import "./ParkingForm.css";
 import { useState, useEffect } from "react";
 import AdminNavbar from "../AdminNavbar";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import { startLoading, stopLoading, showAlert } from "../../actions/index";
+import { connect } from "react-redux";
+import Input from "../smallerComponents/Input";
+import Button from "../smallerComponents/Button";
 
-const ParkingForm = () => {
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = {
+  startLoading: startLoading,
+  stopLoading: stopLoading,
+  showAlert: showAlert,
+};
+
+const ParkingForm = (props) => {
   const [parkingFormDetails, setParkingFormDetails] = useState({
     name: "",
     maxCapacity: "",
@@ -19,38 +33,65 @@ const ParkingForm = () => {
 
   const [parkingPoints, setParkingPoints] = useState([]);
 
+  const history = useHistory();
+
   useEffect(() => {
+    props.startLoading();
     axios
-      .get(
-        `http://localhost:5000/api/parkingpoints/${
-          jwtDecode(localStorage.getItem("token")).id
-        }`
-      )
-      .then((response) => {
-        console.log(response);
-        if (response.data.success) {
-          setParkingPoints(response.data.data);
-        }
+      .get(`${process.env.REACT_APP_API_URL}/parkingpoints/admin`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       })
-      .catch((error) => console.log(error));
+      .then((response) => {
+        setParkingPoints(response.data.data);
+        props.stopLoading();
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status == 401) {
+          if (error.response.data.isTokenExpired == true) {
+            localStorage.removeItem("token");
+          }
+          history.push("/login");
+          props.showAlert(error.response.data.message);
+        } else {
+          props.showAlert("Failed to load data!, Try again later.");
+        }
+        props.stopLoading();
+      });
   }, []);
 
   const { parkingId } = useParams();
 
   useEffect(() => {
     if (parkingId) {
+      props.startLoading();
       axios
-        .get(`http://localhost:5000/api/parkings/parking/${parkingId}`)
-        .then((response) => {
-          console.log(response.data.data);
-          if (response.data.success) {
-            setParkingFormDetails({
-              ...response.data.data,
-              parkingPoint: response.data.data.parkingPoint._id,
-            });
-          }
+        .get(`${process.env.REACT_APP_API_URL}/parkings/parking/${parkingId}`, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         })
-        .catch((error) => console.log(error));
+        .then((response) => {
+          setParkingFormDetails({
+            ...response.data.data,
+            parkingPoint: response.data.data.parkingPoint._id,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error.response.status == 401) {
+            if (error.response.data.isTokenExpired == true) {
+              localStorage.removeItem("token");
+            }
+            history.push("/login");
+            props.showAlert(error.response.data.message);
+          } else {
+            props.showAlert("Failed to load data!, Try again later.");
+          }
+          props.stopLoading();
+        });
     }
   }, []);
 
@@ -63,11 +104,14 @@ const ParkingForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(parkingFormDetails);
+    props.startLoading();
     axios
-      .post("http://localhost:5000/api/parkings/", parkingFormDetails)
+      .post(`${process.env.REACT_APP_API_URL}/parkings/`, parkingFormDetails, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
-        console.log(response);
         setParkingFormDetails({
           name: "",
           maxCapacity: "",
@@ -78,122 +122,125 @@ const ParkingForm = () => {
           parkingPointId: "",
           createdBy: jwtDecode(localStorage.getItem("token")).id,
         });
+        props.stopLoading();
+        props.showAlert("Parking created successfully!");
       })
       .catch((error) => {
         console.log(error);
+        if (error.response.status == 401) {
+          if (error.response.data.isTokenExpired == true) {
+            localStorage.removeItem("token");
+          }
+          history.push("/login");
+          props.showAlert(error.response.data.message);
+        } else {
+          props.showAlert("Failed to create Parking!, Try again later.");
+        }
+        props.stopLoading();
       });
   };
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    console.log(parkingFormDetails);
+    props.startLoading();
     axios
-      .put("http://localhost:5000/api/parkings/", parkingFormDetails)
+      .put(`${process.env.REACT_APP_API_URL}/parkings/`, parkingFormDetails, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
-        console.log(response);
         setParkingFormDetails(response.data.data);
+        props.stopLoading();
+        props.showAlert("Parking updated successfully!")
       })
       .catch((error) => {
         console.log(error);
+        if (error.response.status == 401) {
+          if (error.response.data.isTokenExpired == true) {
+            localStorage.removeItem("token");
+          }
+          history.push("/login");
+          props.showAlert(error.response.data.message);
+        } else {
+          props.showAlert("Failed to update Parking!, Try again later.");
+        }
+        props.stopLoading();
       });
   };
 
-  console.log("Parking Points state: ", parkingPoints);
-
   return (
-    <div className="ParkingForm">
+    <div className="ParkingForm main-container">
       <AdminNavbar />
       <main>
         <form onSubmit={parkingId ? handleUpdate : handleSubmit}>
           <h2>Create Parking</h2>
           <div className="form-fields">
-            <div className="form-child">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                placeholder="Enter name here"
-                minLength="1"
-                maxLength="30"
-                required
-                name="name"
-                value={parkingFormDetails.name}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-child">
-              <label htmlFor="maxCapacity">Max Capacity</label>
-              <input
-                type="number"
-                id="maxCapacity"
-                placeholder="Enter Max Capacity here"
-                min="5"
-                max="50"
-                required
-                name="maxCapacity"
-                value={parkingFormDetails.maxCapacity}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-child">
-              <label htmlFor="height">Height</label>
-              <input
-                type="number"
-                id="height"
-                step="any"
-                placeholder="Enter Height here"
-                min="1"
-                max="20"
-                required
-                name="height"
-                value={parkingFormDetails.height}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-child">
-              <label htmlFor="length">Length</label>
-              <input
-                type="number"
-                id="length"
-                step="any"
-                placeholder="Enter Length here"
-                minLength="3"
-                maxLength="50"
-                required
-                name="length"
-                value={parkingFormDetails.length}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-child">
-              <label htmlFor="width">Width</label>
-              <input
-                type="number"
-                id="width"
-                step="any"
-                placeholder="Enter Width here"
-                minLength="1"
-                maxLength="20"
-                required
-                name="width"
-                value={parkingFormDetails.width}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-child">
-              <label htmlFor="price">Price / hour</label>
-              <input
-                type="number"
-                id="price"
-                placeholder="Enter Price here"
-                min="5"
-                max="5000"
-                required
-                name="price"
-                value={parkingFormDetails.price}
-                onChange={handleInputChange}
-              />
-            </div>
+            <Input
+              name="name"
+              label="Name"
+              placeholder="Enter name here"
+              minLength="1"
+              maxLength="30"
+              required
+              value={parkingFormDetails.name}
+              handleInputChange={handleInputChange}
+            />
+            <Input
+              type="number"
+              name="maxCapacity"
+              label="Max Capacity"
+              placeholder="Enter Max Capacity here"
+              min="5"
+              max="50"
+              required
+              value={parkingFormDetails.maxCapacity}
+              handleInputChange={handleInputChange}
+            />
+            <Input
+              type="number"
+              name="height"
+              label="Height"
+              placeholder="Enter Height here"
+              min="1"
+              max="20"
+              required
+              value={parkingFormDetails.height}
+              handleInputChange={handleInputChange}
+            />
+            <Input
+              type="number"
+              name="length"
+              label="Length"
+              placeholder="Enter Length here"
+              min="3"
+              max="50"
+              required
+              value={parkingFormDetails.length}
+              handleInputChange={handleInputChange}
+            />
+            <Input
+              type="number"
+              name="width"
+              label="Width"
+              placeholder="Enter Width here"
+              min="1"
+              max="20"
+              required
+              value={parkingFormDetails.width}
+              handleInputChange={handleInputChange}
+            />
+            <Input
+              type="number"
+              name="price"
+              label="Price / hour"
+              placeholder="Enter Price here"
+              min="5"
+              max="5000"
+              required
+              value={parkingFormDetails.price}
+              handleInputChange={handleInputChange}
+            />
             {parkingPoints && (
               <div className="form-child">
                 <label htmlFor="parkingPoint">Parking Point</label>
@@ -220,12 +267,12 @@ const ParkingForm = () => {
             )}
           </div>
           <div className="btns">
-            <button className="submit-btn">
+            <Button buttonType="pri-btn">
               {parkingId ? "Update" : "Submit"}
-            </button>
+            </Button>
             {parkingId && (
               <Link to="/admin/parkings">
-                <button className="sec-btn">Back</button>
+                <Button buttonType="sec-btn">Back</Button>
               </Link>
             )}
           </div>
@@ -235,4 +282,4 @@ const ParkingForm = () => {
   );
 };
 
-export default ParkingForm;
+export default connect(mapStateToProps, mapDispatchToProps)(ParkingForm);
