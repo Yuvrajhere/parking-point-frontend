@@ -2,7 +2,6 @@ import "./UserProfile.css";
 import AppNavbar from "../AppNavbar";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import jwtDecode from "jwt-decode";
 import { Link, useHistory } from "react-router-dom";
 import Button from "../smallerComponents/Button";
 import Input from "../smallerComponents/Input";

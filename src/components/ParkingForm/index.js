@@ -2,7 +2,6 @@ import "./ParkingForm.css";
 import { useState, useEffect } from "react";
 import AdminNavbar from "../AdminNavbar";
 import { Link, useParams, useHistory } from "react-router-dom";
-import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { startLoading, stopLoading, showAlert } from "../../actions/index";
 import { connect } from "react-redux";
@@ -28,7 +27,6 @@ const ParkingForm = (props) => {
     width: "",
     price: "",
     parkingPoint: "",
-    createdBy: jwtDecode(localStorage.getItem("token")).id,
   });
 
   const [parkingPoints, setParkingPoints] = useState([]);
@@ -120,7 +118,6 @@ const ParkingForm = (props) => {
           width: "",
           price: "",
           parkingPointId: "",
-          createdBy: jwtDecode(localStorage.getItem("token")).id,
         });
         props.stopLoading();
         props.showAlert("Parking created successfully!");

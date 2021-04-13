@@ -1,0 +1,26 @@
+.Book main {
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  max-width: 400px;
+}
+
+.Book main h2 {
+  background-color: #d3d3d3;
+  padding: 8px 20px;
+  border-radius: 5px;
+  color: #000000;
+}
+
+.Book main form {
+  padding: 20px;
+}
+
+.Book main form .book-btns {
+  display: flex;
+  justify-content: space-between;
+}

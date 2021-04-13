@@ -167,11 +167,13 @@ const ParkingPoint = (props) => {
                   return (
                     <div key={parking._id}>
                       <p>{parking.name}</p>
-                      <p>{"Length : " + parking.length}</p>
-                      <p>{"Width : " + parking.width}</p>
-                      <p>{"Height : " + parking.height}</p>
+                      <p>{"Length : " + parking.length + "m"}</p>
+                      <p>{"Width : " + parking.width + "m"} </p>
+                      <p>{"Height : " + parking.height + "m"}</p>
                       <p>{"Price / Hour : ₹" + parking.price}</p>
-                      <Link to={`/book/${parking._id}`}><Button buttonType="pri-btn">Book</Button></Link>
+                      <Link to={`/book/${parking._id}`}>
+                        <Button buttonType="pri-btn">Book</Button>
+                      </Link>
                     </div>
                   );
                 })}
