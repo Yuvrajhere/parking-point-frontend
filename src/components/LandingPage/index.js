@@ -185,7 +185,7 @@ const LandingPage = () => {
               not aim to provide true services to its users. The whole Web
               Application works as intended but you wont be getting any actual
               parking using this Web App. Find the code and read more from
-              <a href="https://github.com/"> this Github Repo</a>.
+              <a href="https://github.com/Yuvrajhere/parking-point-frontend"> this Github Repo</a>.
             </p>
           </div>
           <div className="contact">
