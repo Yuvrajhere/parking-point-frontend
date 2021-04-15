@@ -36,6 +36,7 @@ const Home = (props) => {
         },
       })
       .then((res) => {
+        console.log("RES, ", res);
         setUserDetails(res.data.data);
         props.stopLoading();
       })
@@ -79,21 +80,74 @@ const Home = (props) => {
           </div>
           <div className="booked-parking">
             <h2>Booked Parking</h2>
-            <div className="no-booked-parking">
-              <h1>You dont have any booked parking right now!</h1>
-              <p>Lets find a good parking for you!</p>
-              <Link to="/search">
-                <Button buttonType="pri-btn">Go to Search Page</Button>
-              </Link>
-            </div>
+            {userDetails.booking.length > 0 ? (
+              <div className="about-booked-parking">
+                <h1>Your Parking is waiting for you!</h1>
+                <div>
+                  <p>{userDetails.booking[0].parking.name}</p>
+                  <p>{userDetails.booking[0].parking.parkingPoint.name}</p>
+                  <p>
+                    {userDetails.booking[0].parking.parkingPoint.addressLine2}
+                  </p>
+                  <p>{userDetails.booking[0].parking.parkingPoint.city}</p>
+                  <p>
+                    {"From - " +
+                      new Date(userDetails.booking[0].arrival).toLocaleString()}
+                  </p>
+                  <p>
+                    {"Till - " +
+                      new Date(
+                        userDetails.booking[0].departure
+                      ).toLocaleString()}
+                  </p>
+                </div>
+                <Link
+                  to={`/parkingpoint/${userDetails.booking[0].parking.parkingPoint._id}`}
+                >
+                  <Button buttonType="pri-btn">Navigate to Parking</Button>
+                </Link>
+              </div>
+            ) : (
+              <div className="no-booked-parking">
+                <h1>You dont have any booked parking right now!</h1>
+                <p>Lets find a good parking for you!</p>
+                <Link to="/search">
+                  <Button buttonType="pri-btn">Go to Search Page</Button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
         <div className="main-b">
           <div className="history">
             <h2>History</h2>
-            <div className="no-history">
-              <p>You dont have any Parking history!</p>
-            </div>
+            {userDetails.booking.length > 0 ? (
+              <div className="history-list">
+                {userDetails.booking.map((eachBooking) => {
+                  return (
+                    <Link key={eachBooking._id} to={`/parkingpoint/${eachBooking.parking.parkingPoint._id}`}>
+                      <div  className="booking-card">
+                        <p>
+                          {eachBooking.parking.name +
+                            " - ₹" +
+                            eachBooking.parking.price}
+                        </p>
+                        <p>{eachBooking.parking.parkingPoint.name}</p>
+                        <p>{eachBooking.parking.parkingPoint.city}</p>
+                        <p>
+                          {"Booking Date - " +
+                            new Date(eachBooking.bookingDate).toLocaleString()}
+                        </p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="no-history">
+                <p>You dont have any Parking history!</p>
+              </div>
+            )}
           </div>
           <div className="saved-parkings">
             <h2>Saved Parking Points</h2>

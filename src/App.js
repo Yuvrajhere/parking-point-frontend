@@ -23,6 +23,7 @@ import ParkingPoint from "./components/ParkingPoint";
 import UnknownPage from "./components/UnknownPage";
 import Alert from "./components/Alert";
 import Book from "./components/Book";
+import Navigation from "./components/Navigation";
 
 const mapStateToProps = (state) => {
   return {
@@ -45,6 +46,7 @@ const App = (props) => {
           <PublicRoute component={Login} path="/login" exact />
           <PublicRoute component={LandingPage} path="/" exact />
           <PublicRoute component={AdminLogin} path="/adminlogin" exact />
+          <PrivateRoute component={Navigation} path="/navigate" exact/>
           <PrivateRoute component={Book} path="/book/:parkingId" exact/>
           <PrivateRoute component={ParkingPoint} path="/parkingpoint/:parkingPointId" exact />
           <PrivateRoute component={Search} path="/search" exact />

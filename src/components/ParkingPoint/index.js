@@ -6,7 +6,6 @@ import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
 import axios from "axios";
 import { startLoading, stopLoading, showAlert } from "../../actions/index";
 import { connect } from "react-redux";
-import Input from "../smallerComponents/Input";
 import Button from "../smallerComponents/Button";
 import { Link, useHistory, useParams } from "react-router-dom";
 
@@ -109,6 +108,42 @@ const ParkingPoint = (props) => {
       });
   }, []);
 
+  const saveParkingPoint = () => {
+    props.startLoading();
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/parkingpoints/parkingpoint/${parkingPointId}`,
+        {parkingPointId},
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((response) => {
+        setParkingPointDetails(response.data.data);
+        setViewport((prevVieport) => ({
+          ...prevVieport,
+          latitude: response.data.data.latitude,
+          longitude: response.data.data.longitude,
+        }));
+        props.stopLoading();
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status == 401) {
+          if (error.response.data.isTokenExpired == true) {
+            localStorage.removeItem("token");
+          }
+          history.push("/login");
+          props.showAlert(error.response.data.message);
+        } else {
+          props.showAlert("Failed to load data!, Try again later.");
+        }
+        props.stopLoading();
+      });
+  };
+
   // /parkingpoint/:parkingPointId
 
   return (
@@ -159,6 +194,7 @@ const ParkingPoint = (props) => {
                 <p>{parkingPointDetails.phone}</p>
                 <p>{parkingPointDetails.email}</p>
               </div>
+              <Button onClick={saveParkingPoint}></Button>
             </div>
             <div className="parkings-div">
               <h2>Parkings</h2>

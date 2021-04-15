@@ -24,3 +24,11 @@
   display: flex;
   justify-content: space-between;
 }
+
+@media screen and (max-width: 800px) {
+  .Book main {
+    margin-top: 0;
+    max-width: 280px;
+    margin-bottom: 20px;
+  }
+}

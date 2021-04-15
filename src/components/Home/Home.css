@@ -67,6 +67,29 @@
   border-radius: 5px;
 }
 
+.Home .booked-parking .about-booked-parking {
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Home .booked-parking > .about-booked-parking h1 {
+  width: 60%;
+  text-align: center;
+  font-size: 32px;
+}
+
+.Home .booked-parking .about-booked-parking > div {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 3px;
+  margin: 20px auto;
+}
+
 .Home .booked-parking > .no-booked-parking {
   margin-top: 10%;
   display: flex;
@@ -122,6 +145,35 @@
   width: 60%;
   font-size: 18px;
   text-align: center;
+}
+
+.history .history-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.history .booking-card {
+  color: #d3d3d3;
+  background-color: #181816;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.history .booking-card:hover {
+  background-color: #ffc62d;
+  color: #000000;
+}
+
+.history .booking-card:first-of-type {
+  margin-top: 10px;
+}
+
+.history .booking-card p:first-of-type {
+  font-size: 20px;
+  margin-bottom: 5px;
 }
 
 .Home .main-b .saved-parkings {
@@ -182,6 +234,16 @@
   .Home .booked-parking > h2 {
     font-size: 24px;
     padding: 5px 20px;
+  }
+
+  .Home .booked-parking .about-booked-parking {
+    margin-top: 0;
+    margin: 40px auto;
+  }
+  
+  .Home .booked-parking > .about-booked-parking h1 {
+    width: 100%;
+    font-size: 28px;
   }
   
   .Home .booked-parking > .no-booked-parking {
