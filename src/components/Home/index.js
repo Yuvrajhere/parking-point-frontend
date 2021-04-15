@@ -125,8 +125,11 @@ const Home = (props) => {
               <div className="history-list">
                 {userDetails.booking.map((eachBooking) => {
                   return (
-                    <Link key={eachBooking._id} to={`/parkingpoint/${eachBooking.parking.parkingPoint._id}`}>
-                      <div  className="booking-card">
+                    <Link
+                      key={eachBooking._id}
+                      to={`/parkingpoint/${eachBooking.parking.parkingPoint._id}`}
+                    >
+                      <div className="booking-card">
                         <p>
                           {eachBooking.parking.name +
                             " - ₹" +
@@ -151,9 +154,28 @@ const Home = (props) => {
           </div>
           <div className="saved-parkings">
             <h2>Saved Parking Points</h2>
-            <div className="no-saved-parkings">
-              <p>You dont have any Saved Parking Points!</p>
-            </div>
+            {userDetails.savedParkingPoints.length > 0 ? (
+              <div className="saved-list">
+                {userDetails.savedParkingPoints.map((eachParkingPoint) => {
+                  return (
+                    <Link
+                      key={eachParkingPoint._id}
+                      to={`/parkingpoint/${eachParkingPoint._id}`}
+                    >
+                      <div className="parking-card">
+                        <p>{eachParkingPoint.name}</p>
+                        <p>{eachParkingPoint.addressLine2}</p>
+                        <p>{eachParkingPoint.city}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="no-saved-parkings">
+                <p>You dont have any Saved Parking Points!</p>
+              </div>
+            )}
           </div>
         </div>
       </main>

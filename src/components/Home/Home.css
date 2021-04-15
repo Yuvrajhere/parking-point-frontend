@@ -205,6 +205,35 @@
   text-align: center;
 }
 
+.saved-parkings .saved-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.saved-parkings .parking-card {
+  color: #d3d3d3;
+  background-color: #181816;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.saved-parkings .parking-card:hover {
+  background-color: #ffc62d;
+  color: #000000;
+}
+
+.saved-parkings .parking-card:first-of-type {
+  margin-top: 10px;
+}
+
+.saved-parkings .parking-card p:first-of-type {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
 @media screen and (max-width: 800px) {
   .Home main {
     padding: 0 5% 20px 5%;

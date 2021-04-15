@@ -108,11 +108,12 @@ const ParkingPoint = (props) => {
       });
   }, []);
 
-  const saveParkingPoint = () => {
+  const saveParkingPoint = (e) => {
+    e.preventDefault();
     props.startLoading();
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/parkingpoints/parkingpoint/${parkingPointId}`,
+        `${process.env.REACT_APP_API_URL}/users/saveparkingpoint/`,
         {parkingPointId},
         {
           headers: {
@@ -121,13 +122,9 @@ const ParkingPoint = (props) => {
         }
       )
       .then((response) => {
-        setParkingPointDetails(response.data.data);
-        setViewport((prevVieport) => ({
-          ...prevVieport,
-          latitude: response.data.data.latitude,
-          longitude: response.data.data.longitude,
-        }));
+        console.log("quack ",response)
         props.stopLoading();
+        props.showAlert(response.data.message)
       })
       .catch((error) => {
         console.log(error);
@@ -137,8 +134,10 @@ const ParkingPoint = (props) => {
           }
           history.push("/login");
           props.showAlert(error.response.data.message);
+        } else if(error.response.status == 409) {
+          props.showAlert("Parking Point already saved!");
         } else {
-          props.showAlert("Failed to load data!, Try again later.");
+          props.showAlert("Failed to save Parking Point!, Try again later.");
         }
         props.stopLoading();
       });
@@ -194,7 +193,7 @@ const ParkingPoint = (props) => {
                 <p>{parkingPointDetails.phone}</p>
                 <p>{parkingPointDetails.email}</p>
               </div>
-              <Button onClick={saveParkingPoint}></Button>
+              <Button buttonType="pri-btn" handleClick={saveParkingPoint}>Save Parking Point</Button>
             </div>
             <div className="parkings-div">
               <h2>Parkings</h2>
